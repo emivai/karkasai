@@ -1,0 +1,214 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- Bootstrap core CSS -->
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="../css/carousel.css" rel="stylesheet">
+    <link href="../css/custom.css" rel="stylesheet">
+  </head>
+  <body>
+
+    <header>
+      <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+        <a class="navbar-brand" href="#">Happy Paws</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+              <a class="nav-link" href="../index.html">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="doctors.html">Doctors</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Prices</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="pets.html">My Pets</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="appointments.html">Appointments</a>
+            </li>
+          </ul>
+          <a class="btn btn-sm btn-outline-secondary" href="signin.html">Sign in</a>
+        </div>
+      </nav>
+    </header>
+
+    <div class="text-center mt-5">
+        <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#exampleModalCenter">Schedule New Appointment</button>
+      </div>
+
+      <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLongTitle">New Apointment</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group row">
+                        <div class="col-sm-2">Pet</div>
+                        <div class="col-sm-10">
+                          <select class="custom-select">
+                              <option selected>Choose...</option>
+                              <option value="1">Nancy</option>
+                              <option value="2">Smudge</option>
+                              <option value="3">Oreo</option>
+                            </select>
+                        </div>
+                      </div>
+                    <div class="form-group row">
+                        <div class="col-sm-2">Doctor</div>
+                        <div class="col-sm-10">
+                          <select class="custom-select">
+                              <option selected>Choose...</option>
+                              <option value="1">Sarah Smith</option>
+                              <option value="2">Ann Jones</option>
+                              <option value="3">Liam Herwig</option>
+                            </select>
+                        </div>
+                      </div>
+                      <div class="form-group row">
+                        <div class="col-sm-2">Time</div>
+                        <div class="col-sm-10">
+                          <select class="custom-select">
+                              <option selected>Choose...</option>
+                              <option value="1">2023-10-12 12:00-13:00</option>
+                              <option value="2">2023-10-12 13:00-14:00</option>
+                              <option value="3">2023-10-12 15:30-16:30</option>
+                            </select>
+                        </div>
+                      </div>
+                      <div class="form-group row">
+                        <div class="col-sm-2">Procedures</div>
+                        <div class="col-sm-10">
+                          <div class="form-check">
+                            <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                            <label class="form-check-label" for="exampleCheck1">Wellness exam</label>
+                          </div>
+                          <div class="form-check">
+                            <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                            <label class="form-check-label" for="exampleCheck1">Dental extraction</label>
+                        </div>
+                            <div class="form-check">
+                                <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                <label class="form-check-label" for="exampleCheck1">Feline infectious peritonitis (FIP) vaccination</label>
+                            </div>
+                            <div class="form-check">
+                                <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                <label class="form-check-label" for="exampleCheck1">Rabies vaccination</label>
+                            </div>
+                            <div class="form-check">
+                                <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                <label class="form-check-label" for="exampleCheck1">Nail trim</label>
+                            </div>
+                            <div class="form-check">
+                                <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                <label class="form-check-label" for="exampleCheck1">Haircut</label>
+                            </div>
+                        </div>
+                      </div>
+                  </form>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-info" data-dismiss="modal">Save changes</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    <div class="container d-flex align-items-center">
+        <div class="row">
+            <div class="col-12 mt-5">
+              <div class="card">
+                <div class="card-body">
+                  <h5 class="card-title">2023-11-25 13:00-14:00</h5>
+                  <p class="badge badge-success">Scheduled</p>
+                  <p class="card-text">Pet: Nancy</p>
+                  <p class="card-text">Doctor: Sarah Smith</p>
+                  <p class="card-text">Procedures: Feline infectious peritonitis (FIP) vaccination</p>
+                  <div class="btn-toolbar" role="toolbar">
+                    <button type="button" class="btn btn-secondary mr-2">View</button>
+                    <button type="button" class="btn btn-secondary mr-2">Edit</button>
+                    <button type="button" class="btn btn-danger mr-2">Cancel</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-12 mt-3">
+              <div class="card">
+                <div class="card-body">
+                  <h5 class="card-title">2023-10-30 10:30-11:30</h5>
+                  <p class="badge badge-success">Scheduled</p>
+                  <p class="card-text">Pet: Oreo</p>
+                  <p class="card-text">Doctor: Lily Anderson</p>
+                  <p class="card-text">Procedures: Dental extraction</p>
+                  <div class="btn-toolbar" role="toolbar">
+                    <button type="button" class="btn btn-secondary mr-2">View</button>
+                    <button type="button" class="btn btn-secondary mr-2">Edit</button>
+                    <button type="button" class="btn btn-danger mr-2">Cancel</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-12 mt-3">
+                <div class="card">
+                  <div class="card-body">
+                    <h5 class="card-title">2022-09-13 12:30-13:30</h5>
+                    <p class="badge badge-danger">Cancelled</p>
+                    <p class="card-text">Pet: Dave</p>
+                  <p class="card-text">Doctor: Liam Herwig</p>
+                  <p class="card-text">Procedures: Wellness exam</p>
+                  <div class="btn-toolbar" role="toolbar">
+                    <button type="button" class="btn btn-secondary mr-2">View</button>
+                    <button type="button" class="btn btn-secondary mr-2" disabled>Edit</button>
+                    <button type="button" class="btn btn-danger mr-2" disabled>Cancel</button>
+                  </div>
+                  </div>
+                </div>
+              </div>
+            <div class="col-12 mt-3">
+                <div class="card">
+                  <div class="card-body">
+                    <h5 class="card-title">2022-09-13 12:30-13:30</h5>
+                    <p class="badge badge-secondary">Done</p>
+                    <p class="card-text">Pet: Smudge</p>
+                  <p class="card-text">Doctor: Liam Herwig</p>
+                  <p class="card-text">Procedures: Wellness exam, Nail trim</p>
+                  <div class="btn-toolbar" role="toolbar">
+                    <button type="button" class="btn btn-secondary mr-2">View</button>
+                    <button type="button" class="btn btn-secondary mr-2" disabled>Edit</button>
+                    <button type="button" class="btn btn-danger mr-2" disabled>Cancel</button>
+                  </div>
+                  </div>
+                </div>
+              </div>
+          </div>
+        </div>
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script>window.jQuery || document.write('<script src="../js/jquery-slim.min.js"><\/script>')</script>
+    <script src="../js/popper.min.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
+    <!-- Just to make our placeholder images work. Don't actually copy the next line! -->
+    <script src="../js/holder.min.js"></script>
+  </body>
+</html>
