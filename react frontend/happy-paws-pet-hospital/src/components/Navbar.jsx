@@ -1,59 +1,56 @@
-import React from 'react'
+import React from "react";
+import { NavLink, Link } from "react-router-dom";
 
-function Navbar () {
+const Navbar = () => {
   return (
     <header>
-      <nav className='navbar navbar-expand-md navbar-dark fixed-top bg-dark'>
-        <div className='container-fluid'>
-          <div className='row w-100'>
-            <div className='col-10'>
-
-              <div className='collapse navbar-collapse' id='navbarCollapse'>
-              <div className='navbar-brand' href='#'>
-                Happy Paws
-              </div>
-                <ul className='navbar-nav mr-auto'>
-                  <li className='nav-item active'>
-                    <a className='nav-link' href='#'>
-                      Home <span className='sr-only'></span>
-                    </a>
-                  </li>
-                  <li className='nav-item'>
-                    <a className='nav-link' href='html/doctors.html'>
-                      Doctors
-                    </a>
-                  </li>
-                  <li className='nav-item'>
-                    <a className='nav-link' href='#'>
-                      Prices
-                    </a>
-                  </li>
-                  <li className='nav-item'>
-                    <a className='nav-link' href='/html/pets.html'>
-                      My Pets
-                    </a>
-                  </li>
-                  <li className='nav-item'>
-                    <a className='nav-link' href='/html/appointments.html'>
-                      Appointments
-                    </a>
-                  </li>
-                </ul>
-              </div>
-            </div>
-            <div className='col-2'>
-              <a
-                className='btn btn-sm btn-outline-secondary'
-                href='html/signin.html'
-              >
-                Sign in
-              </a>
-            </div>
-          </div>
+      <nav className="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+        <a className="navbar-brand ms-5" href="#">
+          Happy Paws
+        </a>
+        <button
+          className="navbar-toggler"
+          type="button"
+          data-toggle="collapse"
+          data-target="#navbarCollapse"
+        >
+          <span className="navbar-toggler-icon"></span>
+        </button>
+        <div className="collapse navbar-collapse" id="navbarCollapse">
+          <ul className="navbar-nav mr-auto flex-grow-1">
+            <li className="nav-item">
+              <NavLink to="/" className="nav-link">
+                Home
+              </NavLink>
+            </li>
+            <li className="nav-item">
+              <NavLink to="/doctors" className="nav-link">
+                Doctors
+              </NavLink>
+            </li>
+            <li className="nav-item">
+              <NavLink to="/prices" className="nav-link">
+                Prices
+              </NavLink>
+            </li>
+            <li className="nav-item">
+              <NavLink to="/pets" className="nav-link">
+                My Pets
+              </NavLink>
+            </li>
+            <li className="nav-item">
+              <NavLink to="/appointments" className="nav-link">
+                Appointments
+              </NavLink>
+            </li>
+          </ul>
+          <Link to="/signin" className="btn btn-sm btn-outline-secondary me-5">
+            Sign in
+          </Link>
         </div>
       </nav>
     </header>
-  )
-}
+  );
+};
 
-export default Navbar
+export default Navbar;

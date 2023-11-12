@@ -1,20 +1,24 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
-import { BrowserRouter } from 'react-router-dom'
-import Navbar from './components/Navbar'
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Navbar from "./components/Navbar";
+import Home from "./pages/Home";
+import Doctors from "./pages/Doctors";
+import Login from "./pages/Login";
+import Pets from "./pages/Pets";
+import Appointments from "./pages/Appointments";
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
-    <div className='flex flex-col h-full'>
-      <BrowserRouter>
-        <Navbar/>
-      </BrowserRouter>
-    </div>
-  )
+    <BrowserRouter>
+      <Navbar />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/doctors" element={<Doctors />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/pets" element={<Pets />} />
+        <Route path="/appointments" element={<Appointments />} />
+      </Routes>
+    </BrowserRouter>
+  );
 }
 
-export default App
+export default App;
