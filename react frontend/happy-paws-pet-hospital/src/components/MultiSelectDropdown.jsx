@@ -26,7 +26,7 @@ const MultiSelectDropdown = () => {
   }
 
   return (
-    <div className='orm-group row mb-2'>
+    <div className='form-group row mb-2'>
       <div class='col-sm-3'>Procedures</div>
       <div class='col-sm-9'>
         <div className='dropdown'>

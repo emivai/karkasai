@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import Appointment from '../components/Appointment'
 import Modal from 'react-modal'
 import MultiSelectDropdown from '../components/MultiSelectDropdown'
+import SelectDropdown from '../components/SelectDropdown'
 
 const customStyles = {
   content: {
@@ -53,41 +54,24 @@ const Appointments = () => {
             ></button>
           </div>
           <div className='modal-body'>
-            <form>
-              <div class='form-group row mb-2'>
-                <div class='col-sm-3'>Pet</div>
-                <div class='col-sm-9'>
-                  <select class='form-select'>
-                    <option selected>Choose...</option>
-                    <option value='1'>Nancy</option>
-                    <option value='2'>Smudge</option>
-                    <option value='3'>Oreo</option>
-                  </select>
-                </div>
-              </div>
-              <div class='form-group row mb-2'>
-                <div class='col-sm-3'>Doctor</div>
-                <div class='col-sm-9'>
-                  <select class='form-select'>
-                    <option selected>Choose...</option>
-                    <option value='1'>Sarah Smith</option>
-                    <option value='2'>Ann Jones</option>
-                    <option value='3'>Liam Herwig</option>
-                  </select>
-                </div>
-              </div>
+            <form className='my-4'>
+              <SelectDropdown
+                header={'Pets'}
+                options={['Nancy', 'Smudge', 'Oreo']}
+              />
+              <SelectDropdown
+                header={'Doctor'}
+                options={['Sarah Smith', 'Ann Jones', 'Liam Herwig']}
+              />
               <MultiSelectDropdown />
-              <div class='form-group row mb-2'>
-                <div class='col-sm-3'>Time</div>
-                <div class='col-sm-9'>
-                  <select class='form-select'>
-                    <option selected>Choose...</option>
-                    <option value='1'>2023-10-12 12:00-13:00</option>
-                    <option value='2'>2023-10-12 13:00-14:00</option>
-                    <option value='3'>2023-10-12 15:30-16:30</option>
-                  </select>
-                </div>
-              </div>
+              <SelectDropdown
+                header={'Time'}
+                options={[
+                  '2023-10-12 12:00-13:00',
+                  '2023-10-12 13:00-14:00',
+                  '2023-10-12 15:30-16:30'
+                ]}
+              />
             </form>
           </div>
           <div class='modal-footer'>
