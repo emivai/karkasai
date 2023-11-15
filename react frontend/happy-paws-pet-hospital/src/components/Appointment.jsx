@@ -30,12 +30,16 @@ const Appointment = ({
             <button type='button' className='btn btn-secondary mr-2'>
               View
             </button>
-            <button type='button' className='btn btn-secondary mr-2'>
-              Edit
-            </button>
-            <button type='button' className='btn btn-danger mr-2'>
-              Cancel
-            </button>
+            {status === 'Scheduled' && (
+              <>
+                <button type='button' className='btn btn-secondary mr-2'>
+                  Edit
+                </button>
+                <button type='button' className='btn btn-danger mr-2'>
+                  Cancel
+                </button>
+              </>
+            )}
           </div>
         </div>
       </div>
