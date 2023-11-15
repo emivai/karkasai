@@ -18,6 +18,10 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.ConfigureInjection(builder.Configuration);
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("all", builder => builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
+});
 
 var app = builder.Build();
 
@@ -26,6 +30,14 @@ app.UseMiddleware<ExceptionHandlingMiddleware>();
 app.UseSwagger();
 
 app.UseSwaggerUI();
+
+app.UseCors(c =>
+{
+    c.AllowCredentials();
+    c.AllowAnyMethod();
+    c.AllowAnyHeader();
+    c.WithOrigins("http://localhost:5173");
+});
 
 app.UseHttpsRedirection();
 
