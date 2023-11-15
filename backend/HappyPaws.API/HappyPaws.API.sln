@@ -1,0 +1,48 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.7.34024.191
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HappyPaws.API", "HappyPaws.API\HappyPaws.API.csproj", "{DCB64408-5498-4E9D-B31B-D00B70BAC7E4}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HappyPaws.Core", "HappyPaws.Core\HappyPaws.Core.csproj", "{5341BDB1-E06E-428C-A904-1FC61EA92497}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HappyPaws.Infrastructure", "HappyPaws.Infrastructure\HappyPaws.Infrastructure.csproj", "{D7FA0DFF-6B22-42F8-BFF6-D1906EE6C11D}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HappyPaws.Application", "HappyPaws.Services\HappyPaws.Application.csproj", "{8EE02495-DF8F-429E-9790-80CC17CA1068}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{C20A84E5-644C-49CF-B292-E53AB6FF34FC}"
+	ProjectSection(SolutionItems) = preProject
+		db.sql = db.sql
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DCB64408-5498-4E9D-B31B-D00B70BAC7E4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DCB64408-5498-4E9D-B31B-D00B70BAC7E4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DCB64408-5498-4E9D-B31B-D00B70BAC7E4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DCB64408-5498-4E9D-B31B-D00B70BAC7E4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5341BDB1-E06E-428C-A904-1FC61EA92497}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5341BDB1-E06E-428C-A904-1FC61EA92497}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5341BDB1-E06E-428C-A904-1FC61EA92497}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5341BDB1-E06E-428C-A904-1FC61EA92497}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D7FA0DFF-6B22-42F8-BFF6-D1906EE6C11D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D7FA0DFF-6B22-42F8-BFF6-D1906EE6C11D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D7FA0DFF-6B22-42F8-BFF6-D1906EE6C11D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D7FA0DFF-6B22-42F8-BFF6-D1906EE6C11D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8EE02495-DF8F-429E-9790-80CC17CA1068}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8EE02495-DF8F-429E-9790-80CC17CA1068}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8EE02495-DF8F-429E-9790-80CC17CA1068}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8EE02495-DF8F-429E-9790-80CC17CA1068}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {1EC490C8-7B03-499C-806A-4819F5C4927D}
+	EndGlobalSection
+EndGlobal

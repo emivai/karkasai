@@ -1,0 +1,533 @@
+{
+	"info": {
+		"_postman_id": "b6007f80-c9c3-48d2-b977-47893a5ffcb2",
+		"name": "HappyPaws API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "30516269"
+	},
+	"item": [
+		{
+			"name": "pets",
+			"item": [
+				{
+					"name": "pets",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:7294/pets",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7294",
+							"path": [
+								"pets"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "pets/{id}",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:7294/pets/772c3deb-f686-451b-a7ea-c692306e4359",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7294",
+							"path": [
+								"pets",
+								"772c3deb-f686-451b-a7ea-c692306e4359"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "pets",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"type\": 0,\r\n  \"name\": \"Rocky\",\r\n  \"birthdate\": \"2018-10-22T19:23:53.361Z\",\r\n  \"photo\": \"string\",\r\n  \"ownerId\": \"6bcf4120-a996-4a56-b3e3-7550dd117a4a\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:7294/pets",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7294",
+							"path": [
+								"pets"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "pets/{id}",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\r\n    \"type\": 1,\r\n    \"name\": \"Tom\",\r\n    \"birthdate\": \"2019-10-22T19:32:15.884Z\",\r\n    \"photo\": \"string\",\r\n    \"ownerId\": \"6bcf4120-a996-4a56-b3e3-7550dd117a4a\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:7294/pets/772c3deb-f686-451b-a7ea-c692306e4359",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7294",
+							"path": [
+								"pets",
+								"772c3deb-f686-451b-a7ea-c692306e4359"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "pets/{id}",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:7294/pets/772c3deb-f686-451b-a7ea-c692306e4359",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7294",
+							"path": [
+								"pets",
+								"772c3deb-f686-451b-a7ea-c692306e4359"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "appointments",
+			"item": [
+				{
+					"name": "pets/{petId}/appointments",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:7294/pets/772c3deb-f686-451b-a7ea-c692306e4359/appointments",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7294",
+							"path": [
+								"pets",
+								"772c3deb-f686-451b-a7ea-c692306e4359",
+								"appointments"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "pets/{petId}/appointments/{appointmentId}",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:7294/pets/772c3deb-f686-451b-a7ea-c692306e4359/appointments/9f6ee551-0ead-4716-983e-3d1d89566794",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7294",
+							"path": [
+								"pets",
+								"772c3deb-f686-451b-a7ea-c692306e4359",
+								"appointments",
+								"9f6ee551-0ead-4716-983e-3d1d89566794"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "pets/{petId}/appointments",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"timeSlotId\": \"16b54b4e-7683-42e1-a670-6bf16877cc7e\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:7294/pets/772c3deb-f686-451b-a7ea-c692306e4359/appointments",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7294",
+							"path": [
+								"pets",
+								"772c3deb-f686-451b-a7ea-c692306e4359",
+								"appointments"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "pets/{petId}/appointments/{appointmentId}",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": \"8de984d0-6fe0-46c7-9de4-b2289d163e33\",\r\n    \"status\": 0,\r\n    \"petId\": \"772c3deb-f686-451b-a7ea-c692306e4359\",\r\n    \"timeSlotId\": \"16b54b4e-7683-42e1-a670-6bf16877cc7e\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:7294/pets/772c3deb-f686-451b-a7ea-c692306e4359/appointments/8de984d0-6fe0-46c7-9de4-b2289d163e33",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7294",
+							"path": [
+								"pets",
+								"772c3deb-f686-451b-a7ea-c692306e4359",
+								"appointments",
+								"8de984d0-6fe0-46c7-9de4-b2289d163e33"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "pets/{petId}/appointments/{appointmentId}",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:7294/pets/772c3deb-f686-451b-a7ea-c692306e4359/appointments/2ae1b65a-0dbe-4f8f-9487-69f5028dcf5b",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7294",
+							"path": [
+								"pets",
+								"772c3deb-f686-451b-a7ea-c692306e4359",
+								"appointments",
+								"2ae1b65a-0dbe-4f8f-9487-69f5028dcf5b"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "notes",
+			"item": [
+				{
+					"name": "pets/{petId}/appointments/{appointmentId}/notes",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:7294/772c3deb-f686-451b-a7ea-c692306e4359/appointments/11ac2cf7-1151-4000-bace-8e2a4d77cdee/notes",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7294",
+							"path": [
+								"772c3deb-f686-451b-a7ea-c692306e4359",
+								"appointments",
+								"11ac2cf7-1151-4000-bace-8e2a4d77cdee",
+								"notes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "pets/{petId}/appointments/{appointmentId}/notes/{noteId}",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:7294/pets/36e33145-a268-4a53-b140-70e504a0d3f3/appointments/b8bb60fd-c0fe-43e3-b366-3ef4239e7650/notes/99aa183e-be56-447b-a5a2-95c817266fdf",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7294",
+							"path": [
+								"pets",
+								"36e33145-a268-4a53-b140-70e504a0d3f3",
+								"appointments",
+								"b8bb60fd-c0fe-43e3-b366-3ef4239e7650",
+								"notes",
+								"99aa183e-be56-447b-a5a2-95c817266fdf"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "pets/{petId}/appointments/{appointmentId}/notes",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:7294/pets/a3e697ce-72b8-4e2d-bb09-1b055b4af962/appointments/notes",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7294",
+							"path": [
+								"pets",
+								"a3e697ce-72b8-4e2d-bb09-1b055b4af962",
+								"appointments",
+								"notes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "pets/{petId}/appointments/{appointmentId}/notes/{noteId}",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:7294/pets/a3e697ce-72b8-4e2d-bb09-1b055b4af962/appointments/notes/",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7294",
+							"path": [
+								"pets",
+								"a3e697ce-72b8-4e2d-bb09-1b055b4af962",
+								"appointments",
+								"notes",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "pets/{petId}/appointments/{appointmentId}/notes/{noteId}",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:7294/pets/a3e697ce-72b8-4e2d-bb09-1b055b4af962/appointments/notes/",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7294",
+							"path": [
+								"pets",
+								"a3e697ce-72b8-4e2d-bb09-1b055b4af962",
+								"appointments",
+								"notes",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "timeslots",
+			"item": [
+				{
+					"name": "timeslots",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:7294/timeslots",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7294",
+							"path": [
+								"timeslots"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "New Request",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"start\": \"2023-10-25T22:43:16.088Z\",\r\n  \"end\": \"2023-10-25T23:43:16.088Z\",\r\n  \"doctorId\": \"312e9ba3-2fc4-4979-bc8e-061dec5453ce\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:7294/timeslots",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7294",
+							"path": [
+								"timeslots"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "procedures",
+			"item": [
+				{
+					"name": "New Request",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:7294/procedures",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7294",
+							"path": [
+								"procedures"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "appointment procedures",
+			"item": [
+				{
+					"name": "New Request",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:7294/appointmentprocedures",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7294",
+							"path": [
+								"appointmentprocedures"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "New Request",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:7294/appointmentprocedures",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7294",
+							"path": [
+								"appointmentprocedures"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "users",
+			"item": [
+				{
+					"name": "New Request",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:7294/users",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7294",
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
