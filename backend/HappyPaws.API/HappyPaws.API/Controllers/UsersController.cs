@@ -1,5 +1,6 @@
 ﻿using HappyPaws.API.Contracts.DTOs.UserDTOs;
 using HappyPaws.Application.Interfaces;
+using HappyPaws.Core.Enums;
 using HappyPaws.Core.Exceptions.Common;
 using Microsoft.AspNetCore.Mvc;
 
@@ -18,12 +19,12 @@ namespace HappyPaws.API.Controllers
             _usersService = usersSerevice;
         }
 
-        [HttpGet]
+        [HttpGet()]
         [ProducesResponseType(typeof(IEnumerable<UserDTO>), (StatusCodes.Status200OK))]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> GetAsync()
+        public async Task<IActionResult> GetAsync([FromQuery] UserType? type = null)
         {
-            var users = await _usersService.GetAllAsync();
+            var users = await _usersService.GetAllAsync(type);
 
             var result = users.Select(UserDTO.FromDomain).ToList();
 

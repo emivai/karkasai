@@ -9,9 +9,6 @@ CREATE TABLE users (
 	photo VARCHAR
 );
 
-ALTER TABLE users  
-   ADD CONSTRAINT check_types 
-   CHECK (type IN (0, 1, 2) );
 
 CREATE TABLE procedures (
 	id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
@@ -30,9 +27,6 @@ CREATE TABLE pets (
    	CONSTRAINT fk_owner FOREIGN KEY(owner_id) REFERENCES users(id) 
 );
 
-ALTER TABLE pets
-   ADD CONSTRAINT check_types 
-   CHECK (type IN (0, 1, 2, 3) );
   
 CREATE TABLE time_slots (
 	id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
@@ -43,8 +37,6 @@ CREATE TABLE time_slots (
    	CONSTRAINT fk_doctor FOREIGN KEY(doctor_id) REFERENCES users(id) 
 );  
 
-CREATE UNIQUE INDEX idx_time_slot_beginning_ending_doctor
-ON time_slots(beginning, ending, doctor_id);
 
 CREATE TABLE appointments (
 	id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
@@ -55,8 +47,6 @@ CREATE TABLE appointments (
    	CONSTRAINT fk_time_slot FOREIGN KEY(time_slot_id) REFERENCES time_slots(id)
 ); 
 
-CREATE UNIQUE INDEX idx_appointment_time_slot
-ON appointments(time_slot_id);
 
 ALTER TABLE appointments
    ADD CONSTRAINT check_types 
@@ -77,5 +67,3 @@ CREATE TABLE appointment_procedures (
 	CONSTRAINT fk_appointment FOREIGN KEY(appointment_id) REFERENCES appointments(id)
 );
 
-CREATE UNIQUE INDEX idx_appointment_procedure_procedure_appointment
-ON appointment_procedures(procedure_id, appointment_id);
