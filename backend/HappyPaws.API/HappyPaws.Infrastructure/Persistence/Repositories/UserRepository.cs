@@ -1,4 +1,5 @@
 ﻿using HappyPaws.Core.Entities;
+using HappyPaws.Core.Enums;
 using HappyPaws.Core.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
@@ -32,8 +33,11 @@ namespace HappyPaws.Infrastructure.Persistence.Repositories
             await _context.SaveChangesAsync();
         }
 
-        public async Task<List<User>> GetAllAsync()
+        public async Task<List<User>> GetAllAsync(UserType? type = null)
         {
+            if(type != null)
+                return await _context.Users.Where(u => u.Type == type).ToListAsync();
+
             return await _context.Users.ToListAsync();
         }
 
