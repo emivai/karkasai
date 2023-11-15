@@ -37,7 +37,7 @@ const MultiSelectDropdown = () => {
           >
             {selectedOptions.length > 0
               ? selectedOptions.join(', ').length > 40
-                ? selectedOptions.join(', ').substring(0, length - 3) + '...'
+                ? selectedOptions.join(', ').substring(0, 37) + '...'
                 : selectedOptions.join(', ')
               : 'Choose...'}
           </button>
