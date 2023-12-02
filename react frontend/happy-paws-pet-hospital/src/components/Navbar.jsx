@@ -5,7 +5,7 @@ const Navbar = () => {
   return (
     <header>
       <nav className="navbar navbar-expand-md navbar-dark bg-dark">
-        <a className="navbar-brand ms-5" href="#">
+        <a className="navbar-brand ms-5" href="/#">
           Happy Paws
         </a>
         <button
