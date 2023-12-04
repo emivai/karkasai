@@ -43,7 +43,7 @@ namespace HappyPaws.API.Auth
 
             Response.Cookies.Append("refreshToken", refreshToken.Token, new CookieOptions{ Expires = refreshToken.Expiration });
 
-            return Ok(accessToken);
+            return Ok(new { AccessToken = accessToken});
         }
 
         [HttpPost]

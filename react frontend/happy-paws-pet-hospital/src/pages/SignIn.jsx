@@ -1,87 +1,71 @@
 import Logo from '../images/logo-black.png'
+import { useNavigate, Link } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
 import React, { useState } from 'react'
+import { login } from '../reducers/user'
 
 const SignIn = () => {
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
 
-  const handleSubmit = async event => {
-    event.preventDefault()
+  const [loginValue, setLoginValue] = useState({
+    email: '',
+    password: ''
+  })
 
-    const requestBody = {
-      email: email,
-      password: password
-    }
+  function handleLoginChange (v) {
+    const { id, value } = v.target
+    setLoginValue({ ...loginValue, [id]: value })
+  }
 
-    try {
-      const response = await fetch('https://localhost:7294/auth/login', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(requestBody)
-      })
-
-      if (!response.ok) {
-        // Handle authentication error
-        console.error('Authentication failed')
-        return
-      }
-
-      const responseData = await response.json()
-
-      // Do something with the response data, e.g., store the token in state or cookies
-      console.log('Authentication successful')
-      console.log('Token:', responseData.token)
-    } catch (error) {
-      console.error('An error occurred during authentication:', error)
+  const handleLoginClick = async () => {
+    if (loginValue.email !== '' && loginValue.password !== '') {
+      console.log('dispatched')
+      await dispatch(login(loginValue))
+      navigate('/')
     }
   }
 
   return (
     <div className='container d-flex align-items-center justify-content-center'>
-      <form className='form-signin' onSubmit={handleSubmit}>
+      <div className='form'>
         <img className='mb-4' src={Logo} alt='' width='150' height='150' />
         <h1 className='h3 mb-3 font-weight-normal'>Please sign in</h1>
-        <label htmlFor='inputEmail' className='sr-only'>
-          Email address
-        </label>
+        <label className='sr-only'>Email address</label>
         <input
           type='email'
-          id='inputEmail'
+          id='email'
           className='form-control'
           placeholder='Email address'
           required
           autoFocus
-          value={email}
-          onChange={e => setEmail(e.target.value)}
+          onChange={e => handleLoginChange(e)}
         />
-        <label htmlFor='inputPassword' className='sr-only'>
-          Password
-        </label>
+        <label className='sr-only'>Password</label>
         <input
           type='password'
-          id='inputPassword'
+          id='password'
           className='form-control'
           placeholder='Password'
           required
-          value={password}
-          onChange={e => setPassword(e.target.value)}
+          onChange={e => handleLoginChange(e)}
         />
-        <button className='btn mt-4 btn-lg btn-info btn-block' type='submit'>
+        <button
+          className='btn mt-4 btn-lg btn-info btn-block'
+          onClick={handleLoginClick}
+          type='button'
+        >
           Sign in
         </button>
         <h1 className='h6 mb-4 mt-4 font-weight-light'>
           Don't have an account?
         </h1>
-        <button
-          className='btn btn-lg btn-secondary btn-block'
-          type='button'
-          onClick={() => console.log('Navigate to Register')}
-        >
-          Register
-        </button>
-      </form>
+        <Link to={'/register'}>
+          <button className='btn btn-lg btn-secondary btn-block' type='button'>
+            Register
+          </button>
+        </Link>
+      </div>
     </div>
   )
 }

@@ -1,7 +1,19 @@
 import React from 'react'
-import { NavLink, Link } from 'react-router-dom'
+import { NavLink, Link, useNavigate } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
+import { logout } from '../reducers/user'
 
 const Navbar = () => {
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
+
+  const user = useSelector(state => state.user)
+
+  const handleLogoutClick = async () => {
+    await dispatch(logout())
+    navigate('/')
+  }
+
   return (
     <header>
       <nav className='navbar navbar-expand-md navbar-dark bg-dark'>
@@ -44,9 +56,30 @@ const Navbar = () => {
               </NavLink>
             </li>
           </ul>
-          <Link to='/signin' className='btn btn-sm btn-outline-secondary me-5'>
-            Sign in
-          </Link>
+          {user?.isLoggedIn ? (
+            <>
+              <div className='text-light mx-2'>{user.userData?.name}</div>
+              <button
+                type='button'
+                className='btn btn-outline-danger mx-3'
+                onClick={handleLogoutClick}
+              >
+                Logout
+              </button>
+            </>
+          ) : (
+            <>
+              <Link
+                to='/signin'
+                className='btn btn-sm btn-outline-secondary me-3'
+              >
+                Sign in
+              </Link>
+              <Link to='/register' className='btn btn-sm btn-secondary me-3'>
+                Register
+              </Link>
+            </>
+          )}
         </div>
       </nav>
     </header>
