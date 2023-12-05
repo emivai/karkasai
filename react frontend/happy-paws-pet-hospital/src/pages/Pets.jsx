@@ -68,7 +68,18 @@ const Pets = () => {
             <input
               type='date'
               id='birthdate'
+              autoFocus
               className='form-control'
+              onChange={e => handleRegisterChange(e)}
+            />
+            <label className='sr-only'>Photo</label>
+            <input
+              type='text'
+              id='name'
+              className='form-control'
+              placeholder='Photo url'
+              required
+              autoFocus
               onChange={e => handleRegisterChange(e)}
             />
           </form>
