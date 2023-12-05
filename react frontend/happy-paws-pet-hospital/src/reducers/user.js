@@ -14,8 +14,8 @@ const getClients = createAsyncThunk(namespace('getClients'), async () => {
     return data
 })
 
-const getDoctors = createAsyncThunk(namespace('currentUser'), async () => {
-    const { data } = await client.get('users?type=1')
+const getDoctors = createAsyncThunk(namespace('getDoctors'), async () => {
+    const { data } = await client.get('users?type=2')
     return data
 })
 
