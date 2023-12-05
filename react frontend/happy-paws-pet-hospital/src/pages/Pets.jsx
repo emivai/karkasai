@@ -54,17 +54,22 @@ const Pets = () => {
               options={['Dog', 'Cat', 'Rodent', 'Exotic']}
               onChange={handleRegisterChange}
             />
-            <SelectDropdown
-              header={'Doctor'}
-              options={['Sarah Smith', 'Ann Jones', 'Liam Herwig']}
+            <label className='sr-only'>Name</label>
+            <input
+              type='text'
+              id='name'
+              className='form-control'
+              placeholder="Enter pet's name"
+              required
+              autoFocus
+              onChange={e => handleRegisterChange(e)}
             />
-            <SelectDropdown
-              header={'BirthDate'}
-              options={[
-                '2023-10-12 12:00-13:00',
-                '2023-10-12 13:00-14:00',
-                '2023-10-12 15:30-16:30'
-              ]}
+            <label>BirthDate</label>
+            <input
+              type='date'
+              id='birthdate'
+              className='form-control'
+              onChange={e => handleRegisterChange(e)}
             />
           </form>
         </Modal.Body>
