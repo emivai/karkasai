@@ -2,8 +2,16 @@ import React, { useEffect, useState } from "react";
 import PetProfile from "../components/PetProfile";
 import { useDispatch, useSelector } from "react-redux";
 import { createPet, getPets } from "../reducers/pet";
-import { Modal } from "react-bootstrap"; // Assuming you are using react-bootstrap for modals
+import { ListGroup, Modal } from "react-bootstrap"; // Assuming you are using react-bootstrap for modals
 import SelectDropdown from "../components/SelectDropdown";
+import { Link } from "react-router-dom";
+
+const petType = {
+  0: "Dog",
+  1: "Cat",
+  2: "Rodent",
+  3: "Exotic",
+};
 
 const Pets = () => {
   const dispatch = useDispatch();
@@ -45,6 +53,10 @@ const Pets = () => {
     refreshPets();
   };
 
+  const getPetType = (value) => {
+    return petType[value];
+  };
+
   function refreshPets() {
     dispatch(getPets());
   }
@@ -55,7 +67,7 @@ const Pets = () => {
 
   return (
     <div className="container marketing pt-5 d-flex flex-column">
-      <div className="mb-5 mx-auto">
+      <div className="mb-5 mx-auto align-self-start">
         <button className="btn btn-info btn-lg" onClick={handleOpenModal}>
           Add pet
         </button>
@@ -122,15 +134,41 @@ const Pets = () => {
       </Modal>
 
       <div className="row">
-        {pets?.map((pet) => (
-          <PetProfile
-            key={pet.id}
-            title={pet.name}
-            birthdate={new Date(pet.birthdate).toLocaleDateString("lt-LT")}
-            type={pet.type}
-            imageSource={pet.photo}
-          />
-        ))}
+        <ListGroup>
+          {pets?.map((pet) => (
+            <ListGroup.Item key={pet.id}>
+              <div className="d-flex flex-row allign-items-center gap-3">
+                <img
+                  className="rounded-circle image"
+                  src={pet.photo}
+                  width="80"
+                  height="80"
+                />
+                <div className="flex-grow-1">
+                  <h2>{pet.name}</h2>
+                  <div>{getPetType(pet.type)}</div>
+                  {new Date(pet.birthdate).toLocaleDateString("lt-LT")}
+                </div>
+                <button type="button" className="btn btn-sm btn-link me-3">
+                  <Link to="/appointments">Appointments</Link>
+                </button>
+                <button type="button" className="btn btn-sm me-3">
+                  Edit
+                </button>
+                <button type="button" className="btn btn-sm btn-danger me-3">
+                  Delete
+                </button>
+              </div>
+            </ListGroup.Item>
+          ))}
+          {/* <PetProfile
+                key={pet.id}
+                title={pet.name}
+                birthdate={new Date(pet.birthdate).toLocaleDateString("lt-LT")}
+                type={getPetType(pet.type)}
+                imageSource={pet.photo}
+              /> */}
+        </ListGroup>
       </div>
     </div>
   );
