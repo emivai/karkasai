@@ -1,16 +1,16 @@
-import React, { useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { currentUser } from './reducers/auth'
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { currentUser } from "./reducers/auth";
 
-export default function AuthProvider (props) {
-  const dispatch = useDispatch()
-  const isLoggedIn = useSelector(state => state.user.isLoggedIn)
+export default function AuthProvider(props) {
+  const dispatch = useDispatch();
+  const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
 
   useEffect(() => {
-    if (isLoggedIn) {
-      dispatch(currentUser())
+    if (isLoggedIn || localStorage.getItem("token")) {
+      dispatch(currentUser());
     }
-  }, [isLoggedIn, dispatch])
+  }, [isLoggedIn, dispatch]);
 
-  return <>{props.children}</>
+  return <>{props.children}</>;
 }
