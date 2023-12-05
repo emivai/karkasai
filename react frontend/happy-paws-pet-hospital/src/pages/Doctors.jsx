@@ -14,7 +14,7 @@ const Doctors = () => {
   return (
     <div className='container marketing pt-5 d-flex flex-column'>
       <div className='row'>
-        {doctors && doctors?.map(doctor => (
+        {doctors?.map(doctor => (
           <CirclePicture
             key={doctor.id}
             title={doctor.name + ' ' + doctor.surname}
