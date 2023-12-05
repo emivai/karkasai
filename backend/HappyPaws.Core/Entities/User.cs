@@ -13,7 +13,6 @@ namespace HappyPaws.Core.Entities
         public string Surname { get; set; }
         public string PhoneNumber { get; set; }
         public List<Pet>? Pets { get; set; }
-        public string? Description { get; set; }
         public string? Photo { get; set; }
         public List<TimeSlot>? TimeSlots { get; set; }
         public List<Appointment>? Appointments { get; set; }

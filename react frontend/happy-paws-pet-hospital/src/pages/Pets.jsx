@@ -1,11 +1,23 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import PetProfile from '../components/PetProfile'
-import { useDispatch, useSelector } from 'react-redux';
-import { getPets } from '../reducers/pet';
+import { useDispatch, useSelector } from 'react-redux'
+import { getPets } from '../reducers/pet'
+import { Modal } from 'react-bootstrap' // Assuming you are using react-bootstrap for modals
+import MultiSelectDropdown from '../components/MultiSelectDropdown'
+import SelectDropdown from '../components/SelectDropdown'
 
 const Pets = () => {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch()
   const { pets } = useSelector(state => state.pet)
+  const [modalIsOpen, setModalIsOpen] = useState(false)
+
+  const handleOpenModal = () => {
+    setModalIsOpen(true)
+  }
+
+  const handleCloseModal = () => {
+    setModalIsOpen(false)
+  }
 
   useEffect(() => {
     dispatch(getPets())
@@ -13,9 +25,69 @@ const Pets = () => {
 
   return (
     <div className='container marketing pt-5 d-flex flex-column'>
+      <div className='mb-5 mx-auto'>
+        <button className='btn btn-info btn-lg' onClick={handleOpenModal}>
+          Add pet
+        </button>
+      </div>
+
+      <Modal show={modalIsOpen} onHide={handleCloseModal}>
+        <Modal.Header closeButton>
+          <Modal.Title> New Apointment</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <form className='my-4'>
+            <SelectDropdown
+              header={'Type'}
+              options={[
+                { label: 'Dog', value: 1 },
+                { label: 'Cat', value: 2 },
+                { label: 'Rodent', value: 3 },
+                { label: 'Exotic', value: 4 }
+              ]}
+            />
+            <SelectDropdown
+              header={'Doctor'}
+              options={['Sarah Smith', 'Ann Jones', 'Liam Herwig']}
+            />
+            <MultiSelectDropdown />
+            <SelectDropdown
+              header={'Time'}
+              options={[
+                '2023-10-12 12:00-13:00',
+                '2023-10-12 13:00-14:00',
+                '2023-10-12 15:30-16:30'
+              ]}
+            />
+          </form>
+        </Modal.Body>
+        <Modal.Footer>
+          <button
+            type='button'
+            className='btn btn-secondary'
+            onClick={handleCloseModal}
+          >
+            Close
+          </button>
+          <button
+            type='button'
+            className='btn btn-info'
+            onClick={handleCloseModal}
+          >
+            Save changes
+          </button>
+        </Modal.Footer>
+      </Modal>
+
       <div className='row'>
         {pets?.map(pet => (
-          <PetProfile key={pet.id} title={pet.name} imageSource={pet.photo} />
+          <PetProfile
+            key={pet.id}
+            title={pet.name}
+            birthdate={new Date(pet.birthdate).toLocaleDateString('lt-LT')}
+            type={pet.type}
+            imageSource={pet.photo}
+          />
         ))}
       </div>
     </div>

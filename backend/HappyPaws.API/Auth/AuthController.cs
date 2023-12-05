@@ -88,7 +88,7 @@ namespace HappyPaws.API.Auth
                 await _refreshTokenService.UpdateAsync(userId, new RefreshTokenEntity { UserId = user.Id, Token = newRefreshToken.Token, Expires = newRefreshToken.Expiration });
             }
 
-            return Ok(new { user = user ?? await _userService.GetAsync(userId), token = bearerToken });
+            return Ok(new { user = UserDTO.FromDomain(user), token = bearerToken });
         }
 
         [HttpPost]

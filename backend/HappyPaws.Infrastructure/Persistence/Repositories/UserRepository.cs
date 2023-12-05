@@ -62,7 +62,6 @@ namespace HappyPaws.Infrastructure.Persistence.Repositories
                 fromDb.Email = user.Email;
                 fromDb.PhoneNumber = user.PhoneNumber;
                 fromDb.Photo = user.Photo ?? fromDb.Photo;
-                fromDb.Description = user.Description ?? fromDb.Description;
             }
 
             await _context.SaveChangesAsync();

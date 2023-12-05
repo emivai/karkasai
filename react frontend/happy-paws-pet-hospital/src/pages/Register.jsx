@@ -34,6 +34,8 @@ const Register = () => {
     }
   }
 
+  console.log(registerValue)
+
   return (
     <div className='container d-flex align-items-center justify-content-center mt-5'>
       <div className='form'>
@@ -60,8 +62,8 @@ const Register = () => {
         />
         <label className='sr-only'>Type</label>
         <Form.Select id='type' onChange={e => handleRegisterChange(e)}>
-          <option value='1'>Client</option>
-          <option value='2'>Doctor</option>
+          <option value={1}>Client</option>
+          <option value={2}>Doctor</option>
         </Form.Select>
         <label className='sr-only'>Photo</label>
         <input

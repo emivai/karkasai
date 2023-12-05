@@ -9,8 +9,8 @@ const initialState = {
 }
 
 const getPets = createAsyncThunk(namespace('getPets'), async () => {
-    const { data } = await client.get('pets')
-    return data
+  const { data } = await client.get('pets')
+  return data
 })
 
 const petSlice = createSlice({
@@ -18,10 +18,9 @@ const petSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: builder => {
-    builder
-      .addCase(getPets.fulfilled, (state, payload) => {
-        return { ...state, pets: payload.payload }
-      })
+    builder.addCase(getPets.fulfilled, (state, payload) => {
+      return { ...state, pets: payload.payload }
+    })
   }
 })
 
