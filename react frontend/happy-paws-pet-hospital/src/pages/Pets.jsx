@@ -19,6 +19,18 @@ const Pets = () => {
     setModalIsOpen(false)
   }
 
+  const [registerValue, setRegisterValue] = useState({
+    name: '',
+    type: 0,
+    birthdate: new Date(),
+    photo: ''
+  })
+
+  function handleRegisterChange (v) {
+    const { id, value } = v.target
+    setRegisterValue({ ...registerValue, [id]: value })
+  }
+
   useEffect(() => {
     dispatch(getPets())
   }, [dispatch])
@@ -33,26 +45,21 @@ const Pets = () => {
 
       <Modal show={modalIsOpen} onHide={handleCloseModal}>
         <Modal.Header closeButton>
-          <Modal.Title> New Apointment</Modal.Title>
+          <Modal.Title> New Pet</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <form className='my-4'>
             <SelectDropdown
               header={'Type'}
-              options={[
-                { label: 'Dog', value: 1 },
-                { label: 'Cat', value: 2 },
-                { label: 'Rodent', value: 3 },
-                { label: 'Exotic', value: 4 }
-              ]}
+              options={['Dog', 'Cat', 'Rodent', 'Exotic']}
+              onChange={handleRegisterChange}
             />
             <SelectDropdown
               header={'Doctor'}
               options={['Sarah Smith', 'Ann Jones', 'Liam Herwig']}
             />
-            <MultiSelectDropdown />
             <SelectDropdown
-              header={'Time'}
+              header={'BirthDate'}
               options={[
                 '2023-10-12 12:00-13:00',
                 '2023-10-12 13:00-14:00',

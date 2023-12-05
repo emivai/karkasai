@@ -68,18 +68,17 @@ namespace HappyPaws.API.Auth
             var refreshToken = Request.Cookies["refreshToken"];
             var token = _tokenManager.DecodeAccessToken(bearerToken);
 
-            var userId = GetUserId();
-            User? user = null;
+            var userId = GetUserId();        
 
             var dbRefreshToken = await _refreshTokenService.GetAsync(userId);
 
             if (token == null || token.ValidFrom > DateTime.UtcNow){ return Unauthorized();}
 
-            if(token.ValidTo < DateTime.UtcNow)
+            User? user = await _userService.GetAsync(userId); 
+
+            if (token.ValidTo < DateTime.UtcNow)
             {
                 if (dbRefreshToken == null || dbRefreshToken.Token != refreshToken || dbRefreshToken.Expires < DateTime.UtcNow) { return Unauthorized(); }
-
-                user = await _userService.GetAsync(userId);
 
                 bearerToken = _tokenManager.CreateAccessToken(user);
                 var newRefreshToken = _tokenManager.CreateRefreshToken();
