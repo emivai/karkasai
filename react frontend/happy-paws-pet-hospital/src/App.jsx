@@ -6,6 +6,7 @@ import Pets from './pages/Pets'
 import Appointments from './pages/Appointments'
 import SignIn from './pages/SignIn'
 import Register from './pages/Register'
+import Prices from './pages/Prices'
 
 function App () {
   return (
@@ -18,6 +19,7 @@ function App () {
         <Route path='/appointments' element={<Appointments />} />
         <Route path='/signin' element={<SignIn />} />
         <Route path='/register' element={<Register />} />
+        <Route path='/prices' element={<Prices />} />
       </Routes>
     </BrowserRouter>
   )

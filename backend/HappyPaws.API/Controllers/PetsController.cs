@@ -32,9 +32,9 @@ namespace HappyPaws.API.Controllers
         {
             List<Core.Entities.Pet> pets;
 
-            //if (User.IsInRole("Client")) pets = await _petsService.GetAllAsync(new Guid(User.FindFirst("UserId")?.Value));
-            //else if (User.IsInRole("Doctor")) pets = await _petsService.GetAllForDoctorAsync(new Guid(User.FindFirst("UserId")?.Value));
-            //else pets = await _petsService.GetAllAsync(null);
+            if (User.IsInRole("Client")) pets = await _petsService.GetAllAsync(new Guid(User.FindFirst("UserId")?.Value));
+            else if (User.IsInRole("Doctor")) pets = await _petsService.GetAllForDoctorAsync(new Guid(User.FindFirst("UserId")?.Value));
+            else pets = await _petsService.GetAllAsync(null);
 
             pets = await _petsService.GetAllAsync(null);
             var result = pets.Select(PetDTO.FromDomain).ToList();
