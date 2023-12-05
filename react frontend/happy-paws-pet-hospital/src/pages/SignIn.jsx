@@ -1,12 +1,14 @@
 import Logo from '../images/logo-black.png'
 import { useNavigate, Link } from 'react-router-dom'
-import { useDispatch } from 'react-redux'
-import React, { useState } from 'react'
-import { login } from '../reducers/user'
+import { useDispatch, useSelector } from 'react-redux'
+import React, { useEffect, useState } from 'react'
+import { login } from '../reducers/auth'
 
 const SignIn = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
+
+  const {isLoggedIn} = useSelector(state => state.auth)
 
   const [loginValue, setLoginValue] = useState({
     email: '',
@@ -20,11 +22,17 @@ const SignIn = () => {
 
   const handleLoginClick = async () => {
     if (loginValue.email !== '' && loginValue.password !== '') {
-      console.log('dispatched')
       await dispatch(login(loginValue))
-      navigate('/')
     }
   }
+
+  useEffect(() => {
+    if(isLoggedIn)
+    {
+      navigate('/')
+    }
+  }, [isLoggedIn])
+  
 
   return (
     <div className='container d-flex align-items-center justify-content-center'>

@@ -1,7 +1,7 @@
 import { useNavigate, Link } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import React, { useState } from 'react'
-import { register } from '../reducers/user'
+import { register } from '../reducers/auth'
 import Form from 'react-bootstrap/Form'
 
 const Register = () => {
@@ -30,11 +30,10 @@ const Register = () => {
       registerValue.password === registerValue.confirmPassword
     ) {
       await dispatch(register(registerValue))
-      navigate('/register')
+      navigate('/signin')
     }
   }
 
-  console.log(registerValue)
   return (
     <div className='container d-flex align-items-center justify-content-center mt-5'>
       <div className='form'>

@@ -1,40 +1,22 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
-import axios from 'axios'
+import { client } from '../api/client'
 
 const name = 'user'
 const namespace = method => name + '/' + method
 
-const config = {
-  headers: { Authorization: `Bearer ${localStorage.token}` }
+const initialState = {
+  doctors: null,
+  clients: null
 }
 
-const initialState = {
-  userData: null,
-  userProfile: null,
-  isLoggedIn: false,
-  role: null
-}
-const login = createAsyncThunk(namespace('login'), async payload => {
-  const { data } = await axios.post(
-    'https://localhost:7294/auth/login',
-    payload
-  )
-  localStorage.setItem('token', data.accessToken)
-  return data
+const getClients = createAsyncThunk(namespace('getClients'), async () => {
+    const { data } = await client.get('users?type=1')
+    return data
 })
-const register = createAsyncThunk(namespace('register'), async payload => {
-  await axios.post('https://localhost:7294/auth/register', payload)
-})
-const currentUser = createAsyncThunk(namespace('currentUser'), async () => {
-  const { data } = await axios.get(
-    'https://localhost:7294/auth/currentUser',
-    config
-  )
-  return data
-})
-const logout = createAsyncThunk(namespace('logout'), async () => {
-  await axios.post('https://localhost:7294/auth/logout', null, config)
-  localStorage.removeItem('token')
+
+const getDoctors = createAsyncThunk(namespace('currentUser'), async () => {
+    const { data } = await client.get('users?type=1')
+    return data
 })
 
 const userSlice = createSlice({
@@ -43,24 +25,13 @@ const userSlice = createSlice({
   reducers: {},
   extraReducers: builder => {
     builder
-      .addCase(login.fulfilled, state => {
-        return { ...state, isLoggedIn: true }
+      .addCase(getClients.fulfilled, (state, payload) => {
+        return { ...state, clients: payload.payload }
       })
-      .addCase(register.fulfilled, state => {
-        return { ...state }
-      })
-      .addCase(currentUser.fulfilled, (state, payload) => {
-        return {
-          ...state,
-          userData: payload.payload.user,
-          role: payload.payload.role,
-          isLoggedIn: true
-        }
-      })
-      .addCase(logout.fulfilled, () => {
-        return { ...initialState }
+      .addCase(getDoctors.fulfilled, (state, payload) => {
+        return { ...state, doctors: payload.payload }
       })
   }
 })
 
-export { login, register, currentUser, logout, userSlice }
+export { getClients, getDoctors, userSlice }

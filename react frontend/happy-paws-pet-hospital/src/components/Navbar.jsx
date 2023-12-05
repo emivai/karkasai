@@ -1,13 +1,13 @@
 import React from 'react'
 import { NavLink, Link, useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import { logout } from '../reducers/user'
+import { logout } from '../reducers/auth'
 
 const Navbar = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
-  const user = useSelector(state => state.user)
+  const {isLoggedIn, userData } = useSelector(state => state.auth)
 
   const handleLogoutClick = async () => {
     await dispatch(logout())
@@ -36,13 +36,15 @@ const Navbar = () => {
               </NavLink>
             </li>
             <li className='nav-item'>
-              <NavLink to='/doctors' className='nav-link'>
-                Doctors
-              </NavLink>
-            </li>
-            <li className='nav-item'>
               <NavLink to='/prices' className='nav-link'>
                 Prices
+              </NavLink>
+            </li>
+            {isLoggedIn &&
+            <>
+            <li className='nav-item'>
+              <NavLink to='/doctors' className='nav-link'>
+                Doctors
               </NavLink>
             </li>
             <li className='nav-item'>
@@ -55,10 +57,12 @@ const Navbar = () => {
                 Appointments
               </NavLink>
             </li>
+           </>
+          }
           </ul>
-          {user?.isLoggedIn ? (
+          {isLoggedIn && userData ? (
             <>
-              <div className='text-light mx-2'>{user.userData?.name}</div>
+              <div className='text-light mx-2'>{userData.name}</div>
               <button
                 type='button'
                 className='btn btn-outline-danger mx-3'
