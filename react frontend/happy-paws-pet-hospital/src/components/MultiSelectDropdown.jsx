@@ -27,8 +27,8 @@ const MultiSelectDropdown = () => {
 
   return (
     <div className="form-group row mb-2">
-      <div className="col-sm-3">Procedures</div>
-      <div className="col-sm-9">
+      <div>
+        <label>Procedures</label>
         <div className="dropdown">
           <button
             className="btn btn-secondary dropdown-toggle w-100 bg-white text-dark text-truncate"
