@@ -18,21 +18,21 @@ namespace HappyPaws.API.Controllers
         private readonly IUserService _usersService;
         private readonly IAuthorizationService _authorizationService;
 
-        public UsersController(IUserService usersSerevice, IAuthorizationService authorizationService) 
+        public UsersController(IUserService usersSerevice, IAuthorizationService authorizationService)
         {
             _usersService = usersSerevice;
             _authorizationService = authorizationService;
         }
 
         [HttpGet]
-        //[Authorize]
+        [Authorize]
         [ProducesResponseType(typeof(IEnumerable<UserDTO>), (StatusCodes.Status200OK))]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> GetAsync([FromQuery] UserType? type = null)
         {
-            //if(User.IsInRole("Client") && type != UserType.Doctor) return Forbid();
+            if(User.IsInRole("Client") && type != UserType.Doctor) return Forbid();
 
-            //if (User.IsInRole("Doctor") && type != UserType.Doctor && type != UserType.Client) return Forbid();
+            if (User.IsInRole("Doctor") && type != UserType.Doctor && type != UserType.Client) return Forbid();
 
             var users = await _usersService.GetAllAsync(type);
 
@@ -89,7 +89,7 @@ namespace HappyPaws.API.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> DeleteAsync(Guid id)
         {
-            var user = _usersService.GetAsync(id);
+            var user = await _usersService.GetAsync(id);
 
             if (user == null) throw new ResourceNotFoundException();
 

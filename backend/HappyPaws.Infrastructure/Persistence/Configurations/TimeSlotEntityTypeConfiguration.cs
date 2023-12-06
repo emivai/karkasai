@@ -21,7 +21,7 @@ namespace HappyPaws.Infrastructure.Persistence.Configurations
 
             builder.Property(p => p.UserId).HasColumnName("doctor_id");
 
-            builder.HasOne(e => e.Doctor).WithMany(e => e.TimeSlots).HasForeignKey(e => e.UserId);
+            builder.HasOne(e => e.Doctor).WithMany(e => e.TimeSlots).HasForeignKey(e => e.UserId).OnDelete(DeleteBehavior.Cascade);
         }
     }
 }
