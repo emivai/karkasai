@@ -23,9 +23,9 @@ namespace HappyPaws.Application.Services
             await _timeSlotRepository.DeleteAsync(id);
         }
 
-        public async Task<List<TimeSlot>> GetAllAsync()
+        public async Task<List<TimeSlot>> GetAllAsync(Guid? doctorId)
         {
-            return await _timeSlotRepository.GetAllAsync();
+            return await _timeSlotRepository.GetAllAsync(doctorId);
         }
 
         public async Task<TimeSlot> GetAsync(Guid id)

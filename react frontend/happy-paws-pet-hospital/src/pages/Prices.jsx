@@ -131,7 +131,11 @@ const Prices = () => {
                   <div>Price: {procedure.price} eur</div>
                   <div>{procedure.description}</div>
                 </div>
-                <button type='button' className='btn btn-sm me-3'>
+                <button
+                  type='button'
+                  className='btn btn-sm me-3'
+                  onClick={handleOpenModal}
+                >
                   Edit
                 </button>
                 <button

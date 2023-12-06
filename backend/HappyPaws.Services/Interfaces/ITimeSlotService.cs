@@ -6,7 +6,7 @@ namespace HappyPaws.Application.Interfaces
     {
         public Task<TimeSlot> AddAsync(TimeSlot timeSlot);
         public Task<TimeSlot> GetAsync(Guid id);
-        public Task<List<TimeSlot>> GetAllAsync();
+        public Task<List<TimeSlot>> GetAllAsync(Guid? doctorId);
         public Task<TimeSlot> UpdateAsync(Guid id, TimeSlot timeSlot);
         public Task DeleteAsync(Guid id);
     }

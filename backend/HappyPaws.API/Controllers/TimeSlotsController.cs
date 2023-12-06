@@ -29,9 +29,9 @@ namespace HappyPaws.API.Controllers
         [HttpGet]
         [ProducesResponseType(typeof(IEnumerable<TimeSlotDTO>), (StatusCodes.Status200OK))]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> GetAsync()
+        public async Task<IActionResult> GetAsync([FromQuery] Guid? doctorId = null)
         {
-            var timeSlots = await _timeSlotService.GetAllAsync();
+            var timeSlots = await _timeSlotService.GetAllAsync(doctorId);
 
             var result = timeSlots.Select(TimeSlotDTO.FromDomain).ToList();
 

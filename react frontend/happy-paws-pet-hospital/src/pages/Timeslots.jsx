@@ -115,7 +115,7 @@ const Timeslots = () => {
         <ListGroup>
           {timeslots?.map(timeslot => (
             <ListGroup.Item key={timeslot.id}>
-              <div className='d-flex flex-row allign-items-center gap-3'>
+              <div className='d-flex flex-row align-items-center gap-3'>
                 <div className='flex-grow-1'>
                   <h2>
                     {new Date(timeslot.start).toLocaleDateString('lt-LT')}
