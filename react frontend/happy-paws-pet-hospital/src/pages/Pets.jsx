@@ -1,9 +1,3 @@
-<<<<<<< Updated upstream
-import React from "react";
-
-const Pets = () => {
-  return <div>Pets</div>;
-=======
 import React, { useEffect, useState } from "react";
 import PetProfile from "../components/PetProfile";
 import { useDispatch, useSelector } from "react-redux";
@@ -11,6 +5,13 @@ import { createPet, getPets } from "../reducers/pet";
 import { ListGroup, Modal } from "react-bootstrap"; // Assuming you are using react-bootstrap for modals
 import SelectDropdown from "../components/SelectDropdown";
 import { Link } from "react-router-dom";
+
+const petType = {
+  0: "Dog",
+  1: "Cat",
+  2: "Rodent",
+  3: "Exotic",
+};
 
 const Pets = () => {
   const dispatch = useDispatch();
@@ -131,25 +132,18 @@ const Pets = () => {
       <div className="row">
         <ListGroup>
           {pets?.map((pet) => (
-            <PetProfile                 
-            key={pet.id}
-            title={pet.name}
-            birthdate={new Date(pet.birthdate).toLocaleDateString("lt-LT")}
-            type={pet.type}
-            imageSource={pet.photo}/>
+            <PetProfile
+              key={pet.id}
+              title={pet.name}
+              birthdate={new Date(pet.birthdate).toLocaleDateString("lt-LT")}
+              type={pet.type}
+              imageSource={pet.photo}
+            />
           ))}
-          {/* <PetProfile
-                key={pet.id}
-                title={pet.name}
-                birthdate={new Date(pet.birthdate).toLocaleDateString("lt-LT")}
-                type={getPetType(pet.type)}
-                imageSource={pet.photo}
-              /> */}
         </ListGroup>
       </div>
     </div>
   );
->>>>>>> Stashed changes
 };
 
 export default Pets;

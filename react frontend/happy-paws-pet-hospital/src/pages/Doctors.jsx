@@ -1,17 +1,15 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import CirclePicture from '../components/CirclePicture'
+import { useDispatch, useSelector } from 'react-redux'
+import { getDoctors } from '../reducers/user'
 
 const Doctors = () => {
-  useEffect(() => {
-    const fetchData = async () => {
-      const data = await fetch('https://localhost:7294/users?type=2')
-      const json = await data.json()
-      setDoctors(json)
-    }
-    fetchData().catch(console.error)
-  }, [])
+  const dispatch = useDispatch()
+  const { doctors } = useSelector(state => state.user)
 
-  const [doctors, setDoctors] = useState()
+  useEffect(() => {
+    dispatch(getDoctors())
+  }, [dispatch])
 
   return (
     <div className='container marketing pt-5 d-flex flex-column'>
@@ -21,6 +19,8 @@ const Doctors = () => {
             key={doctor.id}
             title={doctor.name + ' ' + doctor.surname}
             imageSource={doctor.photo}
+            phoneNumber={doctor.phoneNumber}
+            email={doctor.email}
           />
         ))}
       </div>
