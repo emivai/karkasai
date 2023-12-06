@@ -1,6 +1,6 @@
 import { useNavigate, Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import React, { useState } from "react";
+import { useState } from "react";
 import { register } from "../reducers/auth";
 import Form from "react-bootstrap/Form";
 

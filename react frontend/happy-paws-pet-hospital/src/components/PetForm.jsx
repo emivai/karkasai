@@ -1,13 +1,7 @@
-import React, { useEffect, useState } from "react";
-import PetProfile from "../components/PetProfile";
-import { useDispatch, useSelector } from "react-redux";
-import { createPet, getPets } from "../reducers/pet";
-import { ListGroup, Modal } from "react-bootstrap"; // Assuming you are using react-bootstrap for modals
 import SelectDropdown from "../components/SelectDropdown";
-import { Link } from "react-router-dom";
 
 const PetForm = ({ onChange, formValues }) => {
-  function handleRegisterChange(v) {
+  function handleChange(v) {
     const { id, value } = v.target;
     onChange(id, value);
   }
@@ -39,7 +33,7 @@ const PetForm = ({ onChange, formValues }) => {
         placeholder="Enter pet's name"
         required
         value={formValues.name ?? ""}
-        onChange={(e) => handleRegisterChange(e)}
+        onChange={(e) => handleChange(e)}
       />
       <label>BirthDate</label>
       <input
@@ -57,7 +51,7 @@ const PetForm = ({ onChange, formValues }) => {
         placeholder="Photo url"
         required
         value={formValues.photo ?? ""}
-        onChange={(e) => handleRegisterChange(e)}
+        onChange={(e) => handleChange(e)}
       />
     </form>
   );
