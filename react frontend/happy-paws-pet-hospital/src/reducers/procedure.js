@@ -1,5 +1,4 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
-import { useDispatch, useSelector } from 'react-redux'
 import { client } from '../api/client'
 
 const name = 'procedure'
