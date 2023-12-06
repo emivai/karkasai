@@ -112,7 +112,8 @@ const Prices = () => {
               <div className='d-flex flex-row allign-items-center gap-3'>
                 <div className='flex-grow-1'>
                   <h2>{procedure.name}</h2>
-                  <div>{procedure.price}</div>
+                  <div>Price: {procedure.price} eur</div>
+                  <div>{procedure.description}</div>
                 </div>
                 <button type='button' className='btn btn-sm me-3'>
                   Edit
