@@ -131,6 +131,7 @@ const Timeslots = () => {
                       minute: '2-digit'
                     })}
                   </div>
+                  <div>Doctor Name</div>
                 </div>
                 <button type='button' className='btn btn-sm me-3'>
                   Edit
