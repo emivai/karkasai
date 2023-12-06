@@ -1,15 +1,6 @@
 import React, { useState } from "react";
 
-const options = [
-  "Wellness exam",
-  "Dental extraction",
-  "Feline infectious peritonitis (FIP) vaccination",
-  "Rabies vaccination",
-  "Nail trim",
-  "Haircut",
-];
-
-const MultiSelectDropdown = () => {
+const MultiSelectDropdown = ({ options, formValues, onChange }) => {
   const [selectedOptions, setSelectedOptions] = useState([]);
   const [isDropdownOpen, setDropdownOpen] = useState(false);
 
@@ -23,6 +14,7 @@ const MultiSelectDropdown = () => {
     } else {
       setSelectedOptions([...selectedOptions, option]);
     }
+    onChange("procedureId", selectedOptions);
   };
 
   return (
@@ -35,24 +27,22 @@ const MultiSelectDropdown = () => {
             type="button"
             onClick={toggleDropdown}
           >
-            {selectedOptions.length > 0
-              ? selectedOptions.join(", ")
-              : "Choose..."}
+            Choose...
           </button>
           <div
             className={`dropdown-menu${isDropdownOpen ? " show" : ""} w-100`}
           >
-            {options.map((option) => (
-              <div key={option} className="form-check ms-3">
+            {options?.map((option) => (
+              <div key={option.id} className="form-check ms-3">
                 <input
                   className="form-check-input"
                   type="checkbox"
-                  id={option}
-                  checked={selectedOptions.includes(option)}
-                  onChange={() => handleCheckboxChange(option)}
+                  id={option.id}
+                  checked={selectedOptions.includes(option.id)}
+                  onChange={() => handleCheckboxChange(option.id)}
                 />
-                <label className="form-check-label" htmlFor={option}>
-                  {option}
+                <label className="form-check-label" htmlFor={option.id}>
+                  {option.name}
                 </label>
               </div>
             ))}

@@ -4,9 +4,13 @@ import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 import MultiSelectDropdown from "../components/MultiSelectDropdown";
 import SelectDropdown from "../components/SelectDropdown";
+import { useLocation } from "react-router-dom";
+import AppointmentForm from "../components/AppointmentForm";
 
 const Appointments = () => {
+  const { state } = useLocation();
   const [modalIsOpen, setIsOpen] = useState(false);
+  const [createValues, setCreateValues] = useState({ petId: state.id });
 
   function handleOpenModal() {
     setIsOpen(true);
@@ -16,6 +20,11 @@ const Appointments = () => {
     setIsOpen(false);
   }
 
+  const handleFormChange = (id, value) => {
+    setCreateValues({ ...createValues, [id]: value });
+  };
+
+  console.log(createValues);
   return (
     <>
       <div className="text-center mt-5">
@@ -32,25 +41,11 @@ const Appointments = () => {
           <Modal.Title> New Apointment</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <form className="my-4">
-            <SelectDropdown
-              header={"Pets"}
-              options={["Nancy", "Smudge", "Oreo"]}
-            />
-            <SelectDropdown
-              header={"Doctor"}
-              options={["Sarah Smith", "Ann Jones", "Liam Herwig"]}
-            />
-            <MultiSelectDropdown />
-            <SelectDropdown
-              header={"Time"}
-              options={[
-                "2023-10-12 12:00-13:00",
-                "2023-10-12 13:00-14:00",
-                "2023-10-12 15:30-16:30",
-              ]}
-            />
-          </form>
+          <AppointmentForm
+            pet={state}
+            onChange={handleFormChange}
+            formValues={createValues}
+          />
         </Modal.Body>
         <Modal.Footer>
           <button
