@@ -1,14 +1,14 @@
 import React from "react";
 import { Form } from "react-bootstrap";
 
-const SelectDropdown = ({ header, options, handleChange, formId }) => {
+const SelectDropdown = ({ header, options, value, handleChange, formId }) => {
   return (
     <div className="form-group row mb-2">
       <div>
         <label>{header}</label>
-        <Form.Select onChange={handleChange} id={formId}>
+        <Form.Select onChange={handleChange} id={formId} value={value}>
           {options.map((option, index) => (
-            <option key={option} value={index + 1}>
+            <option key={option} value={index}>
               {option}
             </option>
           ))}

@@ -16,6 +16,15 @@ const getPets = createAsyncThunk(namespace("getPets"), async () => {
 const createPet = createAsyncThunk(namespace("createPet"), async (payload) => {
   await client.post("pets", payload);
 });
+
+const editPet = createAsyncThunk(namespace("editPet"), async (payload) => {
+  await client.put(`pets/${payload.id}`, payload.value);
+});
+
+const deletePet = createAsyncThunk(namespace("deletePet"), async (payload) => {
+  await client.delete(`pets/${payload}`);
+});
+
 const petSlice = createSlice({
   name: name,
   initialState,
@@ -27,8 +36,14 @@ const petSlice = createSlice({
       })
       .addCase(createPet.fulfilled, (state) => {
         return { ...state };
+      })
+      .addCase(editPet.fulfilled, (state) => {
+        return { ...state };
+      })
+      .addCase(deletePet.fulfilled, (state) => {
+        return { ...state };
       });
   },
 });
 
-export { getPets, createPet, petSlice };
+export { getPets, createPet, editPet, deletePet, petSlice };
