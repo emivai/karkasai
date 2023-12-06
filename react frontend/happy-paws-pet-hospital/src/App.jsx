@@ -7,6 +7,7 @@ import Appointments from './pages/Appointments'
 import SignIn from './pages/SignIn'
 import Register from './pages/Register'
 import Prices from './pages/Prices'
+import Timeslots from './pages/Timeslots'
 
 function App () {
   return (
@@ -20,6 +21,7 @@ function App () {
         <Route path='/signin' element={<SignIn />} />
         <Route path='/register' element={<Register />} />
         <Route path='/prices' element={<Prices />} />
+        <Route path='/timeslots' element={<Timeslots />} />
       </Routes>
     </BrowserRouter>
   )
