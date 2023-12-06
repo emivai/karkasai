@@ -19,6 +19,21 @@ const createProcedure = createAsyncThunk(
     await client.post('procedures', payload)
   }
 )
+
+const editProcedure = createAsyncThunk(
+  namespace('editProcedure'),
+  async payload => {
+    await client.put(`procedures/${payload.id}`, payload.value)
+  }
+)
+
+const deleteProcedure = createAsyncThunk(
+  namespace('deleteProcedure'),
+  async payload => {
+    await client.delete(`procedures/${payload}`)
+  }
+)
+
 const procedureSlice = createSlice({
   name: name,
   initialState,
@@ -34,4 +49,10 @@ const procedureSlice = createSlice({
   }
 })
 
-export { getProcedures, createProcedure, procedureSlice }
+export {
+  getProcedures,
+  createProcedure,
+  editProcedure,
+  deleteProcedure,
+  procedureSlice
+}

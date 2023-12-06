@@ -76,7 +76,7 @@ namespace HappyPaws.API.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> DeleteAsync(Guid id)
         {
-            var procedure = _procedureService.GetAsync(id);
+            var procedure = await _procedureService.GetAsync(id);
 
             if (procedure == null) throw new ResourceNotFoundException();
 
