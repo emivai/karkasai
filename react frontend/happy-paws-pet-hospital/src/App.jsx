@@ -8,12 +8,13 @@ import SignIn from "./pages/SignIn";
 import Register from "./pages/Register";
 import Prices from "./pages/Prices";
 import UserEdit from "./pages/UserEdit";
+import Timeslots from './pages/Timeslots'
 
 function App() {
   return (
     <BrowserRouter>
       <Navbar />
-      <Routes>
+      <Routes> 
         <Route path="/" element={<Home />} />
         <Route path="/doctors" element={<Doctors />} />
         <Route path="/pets" element={<Pets />} />
@@ -22,6 +23,7 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/prices" element={<Prices />} />
         <Route path="/user/edit" element={<UserEdit />} />
+        <Route path='/timeslots' element={<Timeslots />} />
       </Routes>
     </BrowserRouter>
   );
