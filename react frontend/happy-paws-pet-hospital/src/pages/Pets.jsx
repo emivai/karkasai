@@ -1,17 +1,9 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import PetProfile from "../components/PetProfile";
 import { useDispatch, useSelector } from "react-redux";
 import { createPet, getPets } from "../reducers/pet";
-import { ListGroup, Modal } from "react-bootstrap"; // Assuming you are using react-bootstrap for modals
-import SelectDropdown from "../components/SelectDropdown";
-import { Link } from "react-router-dom";
-
-const petType = {
-  0: "Dog",
-  1: "Cat",
-  2: "Rodent",
-  3: "Exotic",
-};
+import { ListGroup, Modal } from "react-bootstrap";
+import PetForm from "../components/PetForm";
 
 const Pets = () => {
   const dispatch = useDispatch();
@@ -29,37 +21,19 @@ const Pets = () => {
   const [registerValue, setRegisterValue] = useState({
     name: "",
     type: 0,
-    birthdate: null,
+    birthdate: new Date(),
     photo: "",
   });
 
-  function handleRegisterChange(v) {
-    const { id, value } = v.target;
-    setRegisterValue({ ...registerValue, [id]: value });
-  }
-
-  function handleNumericChange(v) {
-    const { id, value } = v.target;
-    setRegisterValue({ ...registerValue, [id]: Number(value - 1) });
-  }
-
-  function handleDateChange(v) {
-    const { id, value } = v.target;
-    setRegisterValue({ ...registerValue, [id]: new Date(value).toISOString() });
-  }
   const handleRegisterClick = async () => {
     await dispatch(createPet(registerValue));
     handleCloseModal();
-    refreshPets();
-  };
-
-  const getPetType = (value) => {
-    return petType[value];
-  };
-
-  function refreshPets() {
     dispatch(getPets());
-  }
+  };
+
+  const handleFormChange = (id, value) => {
+    setRegisterValue({ ...registerValue, [id]: value });
+  };
 
   useEffect(() => {
     dispatch(getPets());
@@ -67,7 +41,7 @@ const Pets = () => {
 
   return (
     <div className="container marketing pt-5 d-flex flex-column">
-      <div className="mb-5 mx-auto align-self-start">
+      <div className="mb-2 align-self-start">
         <button className="btn btn-info btn-lg" onClick={handleOpenModal}>
           Add pet
         </button>
@@ -78,42 +52,7 @@ const Pets = () => {
           <Modal.Title> New Pet</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <form className="my-4">
-            <SelectDropdown
-              header={"Type"}
-              formId="type"
-              options={["Dog", "Cat", "Rodent", "Exotic"]}
-              handleChange={handleNumericChange}
-            />
-            <label className="sr-only">Name</label>
-            <input
-              type="text"
-              id="name"
-              className="form-control"
-              placeholder="Enter pet's name"
-              required
-              autoFocus
-              onChange={(e) => handleRegisterChange(e)}
-            />
-            <label>BirthDate</label>
-            <input
-              type="date"
-              id="birthdate"
-              autoFocus
-              className="form-control"
-              onChange={(e) => handleDateChange(e)}
-            />
-            <label className="sr-only">Photo</label>
-            <input
-              type="text"
-              id="photo"
-              className="form-control"
-              placeholder="Photo url"
-              required
-              autoFocus
-              onChange={(e) => handleRegisterChange(e)}
-            />
-          </form>
+          <PetForm onChange={handleFormChange} formValues={registerValue} />
         </Modal.Body>
         <Modal.Footer>
           <button
@@ -128,7 +67,7 @@ const Pets = () => {
             className="btn btn-info"
             onClick={handleRegisterClick}
           >
-            Save changes
+            Register Pet
           </button>
         </Modal.Footer>
       </Modal>
@@ -136,38 +75,8 @@ const Pets = () => {
       <div className="row">
         <ListGroup>
           {pets?.map((pet) => (
-            <ListGroup.Item key={pet.id}>
-              <div className="d-flex flex-row allign-items-center gap-3">
-                <img
-                  className="rounded-circle image"
-                  src={pet.photo}
-                  width="80"
-                  height="80"
-                />
-                <div className="flex-grow-1">
-                  <h2>{pet.name}</h2>
-                  <div>{getPetType(pet.type)}</div>
-                  {new Date(pet.birthdate).toLocaleDateString("lt-LT")}
-                </div>
-                <button type="button" className="btn btn-sm btn-link me-3">
-                  <Link to="/appointments">Appointments</Link>
-                </button>
-                <button type="button" className="btn btn-sm me-3">
-                  Edit
-                </button>
-                <button type="button" className="btn btn-sm btn-danger me-3">
-                  Delete
-                </button>
-              </div>
-            </ListGroup.Item>
+            <PetProfile key={pet.id} pet={pet} />
           ))}
-          {/* <PetProfile
-                key={pet.id}
-                title={pet.name}
-                birthdate={new Date(pet.birthdate).toLocaleDateString("lt-LT")}
-                type={getPetType(pet.type)}
-                imageSource={pet.photo}
-              /> */}
         </ListGroup>
       </div>
     </div>
