@@ -13,10 +13,11 @@ const getTimeslots = createAsyncThunk(namespace('gettimeslots'), async () => {
   return data
 })
 
-const createTimeslot = createAsyncThunk(
-  namespace('createTimeslot'),
+const getTimeslotsByDoctorId = createAsyncThunk(
+  namespace('getTimeslotsByDoctorId'),
   async payload => {
-    await client.post('timeslots', payload)
+    const { data } = await client.get(`timeslots?doctorId=${payload}`)
+    return data
   }
 )
 
@@ -43,8 +44,8 @@ const timeslotSlice = createSlice({
       .addCase(getTimeslots.fulfilled, (state, payload) => {
         return { ...state, timeslots: payload.payload }
       })
-      .addCase(createTimeslot.fulfilled, state => {
-        return { ...state }
+      .addCase(getTimeslotsByDoctorId.fulfilled, (state, payload) => {
+        return { ...state, timeslots: payload.payload }
       })
       .addCase(editTimeslot.fulfilled, state => {
         return { ...state }

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { ListGroup } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Modal } from "react-bootstrap";
 import { editPet, deletePet, getPets } from "../reducers/pet";
 import PetForm from "./PetForm";
@@ -15,6 +15,7 @@ const petType = {
 
 const PetProfile = ({ pet }) => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const [editValue, setEditValue] = useState();
   const [modalIsOpen, setModalIsOpen] = useState(false);
@@ -43,6 +44,10 @@ const PetProfile = ({ pet }) => {
   const handleDeleteClick = async () => {
     await dispatch(deletePet(pet.id));
     dispatch(getPets());
+  };
+
+  const handleAppointmentsClick = () => {
+    navigate("/appointments", { state: pet });
   };
 
   useEffect(() => {
@@ -94,8 +99,12 @@ const PetProfile = ({ pet }) => {
           <div>{getPetType(pet?.type)}</div>
           {new Date(pet?.birthdate).toLocaleDateString("lt-LT")}
         </div>
-        <button type="button" className="btn btn-sm btn-link me-3">
-          <Link to="/appointments">Appointments</Link>
+        <button
+          type="button"
+          className="btn btn-sm me-3"
+          onClick={handleAppointmentsClick}
+        >
+          Appointments
         </button>
         <button
           type="button"
