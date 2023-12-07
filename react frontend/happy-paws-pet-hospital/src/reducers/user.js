@@ -29,8 +29,16 @@ const deleteUser = createAsyncThunk(namespace('deleteUser'), async payload => {
 })
 
 const getUser = createAsyncThunk(namespace('getUser'), async payload => {
-  const { data } = await client.get(`users/${payload.id}`, payload.value)
-  return data
+  if (Array.isArray(payload.id)) {
+    // If an array of ids is provided, fetch multiple users
+    const promises = payload.id.map(id => client.get(`users/${id}`))
+    const responses = await Promise.all(promises)
+    return responses.map(response => response.data)
+  } else {
+    // If a single id is provided, fetch a single user
+    const { data } = await client.get(`users/${payload.id}`)
+    return data
+  }
 })
 
 const userSlice = createSlice({
@@ -51,8 +59,8 @@ const userSlice = createSlice({
       .addCase(deleteUser.fulfilled, state => {
         return { ...state }
       })
-      .addCase(getUser.fulfilled, state => {
-        return { ...state, doctor: payload.payload }
+      .addCase(getUser.fulfilled, (state, action) => {
+        return { ...state, doctor: action.payload }
       })
   }
 })

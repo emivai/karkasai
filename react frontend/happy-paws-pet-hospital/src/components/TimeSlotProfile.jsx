@@ -12,7 +12,7 @@ import TimeslotForm from './TimeslotForm'
 
 const TimeslotProfile = ({ timeslot }) => {
   const dispatch = useDispatch()
-  const doctor = useSelector(state => state.user)
+  const users = useSelector(state => state.user)
 
   const [editValue, setEditValue] = useState()
   const [modalIsOpen, setModalIsOpen] = useState(false)
@@ -49,8 +49,9 @@ const TimeslotProfile = ({ timeslot }) => {
         })
       }
 
-      if (timeslot && timeslot.doctorId) {
-        await dispatch(getUser(timeslot.doctorId))
+      if (timeslot && timeslot.usersId) {
+        await dispatch(getUser({ id: timeslot.usersId }))
+        console.log('Doctor Data:', users)
       }
     }
 
@@ -97,7 +98,9 @@ const TimeslotProfile = ({ timeslot }) => {
               minute: '2-digit'
             })}
           </div>
-          <div>{doctor.Name}</div>
+          <div>
+            {users?.doctor.name} {users?.doctor.surname}
+          </div>
         </div>
         <button
           type='button'
