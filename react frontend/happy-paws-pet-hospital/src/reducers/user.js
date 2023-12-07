@@ -7,7 +7,7 @@ const namespace = method => name + '/' + method
 const initialState = {
   doctors: null,
   clients: null,
-  user: null
+  doctor: null
 }
 
 const getClients = createAsyncThunk(namespace('getClients'), async () => {
@@ -40,10 +40,10 @@ const userSlice = createSlice({
   extraReducers: builder => {
     builder
       .addCase(getClients.fulfilled, (state, payload) => {
-        return { ...state, clients: payload }
+        return { ...state, clients: payload.payload }
       })
       .addCase(getDoctors.fulfilled, (state, payload) => {
-        return { ...state, doctors: payload }
+        return { ...state, doctors: payload.payload }
       })
       .addCase(editUser.fulfilled, state => {
         return { ...state }
@@ -52,7 +52,7 @@ const userSlice = createSlice({
         return { ...state }
       })
       .addCase(getUser.fulfilled, state => {
-        return { ...state, user: payload }
+        return { ...state, doctor: payload.payload }
       })
   }
 })
