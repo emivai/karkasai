@@ -1,28 +1,14 @@
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { ListGroup, Modal } from 'react-bootstrap'
-import {
-  createProcedure,
-  getProcedures,
-  deleteProcedure,
-  editProcedure
-} from '../reducers/procedure'
+import { createProcedure, getProcedures } from '../reducers/procedure'
+import PriceForm from '../components/PriceForm'
+import PriceProfile from '../components/PriceProfile'
 
 const Prices = () => {
   const dispatch = useDispatch()
   const { procedures } = useSelector(state => state.procedure)
   const [modalIsOpen, setModalIsOpen] = useState(false)
-
-  function handleRegisterChange (v) {
-    const { id, value } = v.target
-    setRegisterValue({ ...registerValue, [id]: value })
-  }
-
-  const handleRegisterClick = async () => {
-    await dispatch(createProcedure(registerValue))
-    handleCloseModal()
-    refreshProcedures()
-  }
 
   const handleOpenModal = () => {
     setModalIsOpen(true)
@@ -32,34 +18,29 @@ const Prices = () => {
     setModalIsOpen(false)
   }
 
-  function refreshProcedures () {
-    dispatch(getProcedures())
-  }
+  const [registerValue, setRegisterValue] = useState({
+    name: '',
+    price: 0.0,
+    description: ''
+  })
 
-  const handleEditClick = async id => {
-    await dispatch(editProcedure({ id: id, value: editValue }))
+  const handleRegisterClick = async () => {
+    await dispatch(createProcedure(registerValue))
     handleCloseModal()
     dispatch(getProcedures())
   }
 
-  const handleDeleteClick = async id => {
-    await dispatch(deleteProcedure(id))
-    dispatch(getProcedures())
+  const handleFormChange = (id, value) => {
+    setRegisterValue({ ...registerValue, [id]: value })
   }
 
   useEffect(() => {
     dispatch(getProcedures())
   }, [dispatch])
 
-  const [registerValue, setRegisterValue] = useState({
-    name: '',
-    price: 0,
-    description: ''
-  })
-
   return (
     <div className='container marketing pt-5 d-flex flex-column'>
-      <div className='mb-5 mx-auto align-self-start'>
+      <div className='mb-2 align-self-start'>
         <button className='btn btn-info btn-lg' onClick={handleOpenModal}>
           Add procedure
         </button>
@@ -67,41 +48,10 @@ const Prices = () => {
 
       <Modal show={modalIsOpen} onHide={handleCloseModal}>
         <Modal.Header closeButton>
-          <Modal.Title>New Procedure</Modal.Title>
+          <Modal.Title> New Procedure</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <form className='my-4'>
-            <label className='sr-only'>Name</label>
-            <input
-              type='text'
-              id='name'
-              className='form-control'
-              placeholder="Enter procedure's name"
-              required
-              autoFocus
-              onChange={e => handleRegisterChange(e)}
-            />
-            <label className='sr-only'>Price</label>
-            <input
-              type='text'
-              id='price'
-              className='form-control'
-              placeholder='Example: 20'
-              required
-              autoFocus
-              onChange={e => handleRegisterChange(e)}
-            />
-            <label className='sr-only'>Description</label>
-            <input
-              type='text'
-              id='description'
-              className='form-control'
-              placeholder='Enter description'
-              required
-              autoFocus
-              onChange={e => handleRegisterChange(e)}
-            />
-          </form>
+          <PriceForm onChange={handleFormChange} formValues={registerValue} />
         </Modal.Body>
         <Modal.Footer>
           <button
@@ -116,7 +66,7 @@ const Prices = () => {
             className='btn btn-info'
             onClick={handleRegisterClick}
           >
-            Save changes
+            Register Procedure
           </button>
         </Modal.Footer>
       </Modal>
@@ -124,29 +74,7 @@ const Prices = () => {
       <div className='row'>
         <ListGroup>
           {procedures?.map(procedure => (
-            <ListGroup.Item key={procedure.id}>
-              <div className='d-flex flex-row align-items-center gap-3'>
-                <div className='flex-grow-1'>
-                  <h2>{procedure.name}</h2>
-                  <div>Price: {procedure.price} eur</div>
-                  <div>{procedure.description}</div>
-                </div>
-                <button
-                  type='button'
-                  className='btn btn-sm me-3'
-                  onClick={handleOpenModal}
-                >
-                  Edit
-                </button>
-                <button
-                  type='button'
-                  className='btn btn-sm btn-danger me-3'
-                  onClick={() => handleDeleteClick(procedure.id)}
-                >
-                  Delete
-                </button>
-              </div>
-            </ListGroup.Item>
+            <PriceProfile key={procedure.id} procedure={procedure} />
           ))}
         </ListGroup>
       </div>

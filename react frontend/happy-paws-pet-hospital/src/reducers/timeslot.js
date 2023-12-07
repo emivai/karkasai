@@ -19,6 +19,21 @@ const createTimeslot = createAsyncThunk(
     await client.post('timeslots', payload)
   }
 )
+
+const editTimeslot = createAsyncThunk(
+  namespace('editTimeslot'),
+  async payload => {
+    await client.put(`timeslots/${payload.id}`, payload.value)
+  }
+)
+
+const deleteTimeslot = createAsyncThunk(
+  namespace('deleteTimeslot'),
+  async payload => {
+    await client.delete(`timeslots/${payload}`)
+  }
+)
+
 const timeslotSlice = createSlice({
   name: name,
   initialState,
@@ -31,7 +46,19 @@ const timeslotSlice = createSlice({
       .addCase(createTimeslot.fulfilled, state => {
         return { ...state }
       })
+      .addCase(editTimeslot.fulfilled, state => {
+        return { ...state }
+      })
+      .addCase(deleteTimeslot.fulfilled, state => {
+        return { ...state }
+      })
   }
 })
 
-export { getTimeslots, createTimeslot, timeslotSlice }
+export {
+  getTimeslots,
+  createTimeslot,
+  deleteTimeslot,
+  editTimeslot,
+  timeslotSlice
+}

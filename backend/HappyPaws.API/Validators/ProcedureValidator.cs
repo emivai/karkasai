@@ -11,7 +11,7 @@ namespace HappyPaws.API.Validators
             RuleFor(procedure => procedure.Name).Length(1, 100).WithMessage("Name has to be 1-100 characters long.");
 
             RuleFor(procedure => procedure.Description).NotEmpty().WithMessage("Description is required.");
-            RuleFor(procedure => procedure.Description).Length(1, 250).WithMessage("Name has to be 1-250 characters long.");
+            RuleFor(procedure => procedure.Description).Length(1, 500).WithMessage("Description has to be 1-250 characters long.");
 
             RuleFor(procedure => procedure.Price).NotEmpty().WithMessage("Price is required.");
             RuleFor(procedure => procedure.Price).InclusiveBetween(0, 10000).WithMessage("Price has to be in range 0 - 10000.");
@@ -26,9 +26,9 @@ namespace HappyPaws.API.Validators
             RuleFor(procedure => procedure.Name).Length(1, 100).WithMessage("Name has to be 1-100 characters long.");
 
             RuleFor(procedure => procedure.Description).NotEmpty().WithMessage("Description is required.");
-            RuleFor(procedure => procedure.Description).Length(1, 250).WithMessage("Name has to be 1-250 characters long.");
-
-            RuleFor(procedure => procedure.Price).NotEmpty().WithMessage("Price is required.");
+            RuleFor(procedure => procedure.Description).Length(1, 500).WithMessage("Description has to be 1-250 characters long.");
+            
+            RuleFor(procedure => procedure.Price).NotNull().WithMessage("Price is required.");
             RuleFor(procedure => procedure.Price).InclusiveBetween(0, 10000).WithMessage("Price has to be in range 0 - 10000.");
         }
     }

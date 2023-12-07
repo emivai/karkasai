@@ -46,6 +46,12 @@ const procedureSlice = createSlice({
       .addCase(createProcedure.fulfilled, state => {
         return { ...state }
       })
+      .addCase(editProcedure.fulfilled, state => {
+        return { ...state }
+      })
+      .addCase(deleteProcedure.fulfilled, state => {
+        return { ...state }
+      })
   }
 })
 

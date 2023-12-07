@@ -3,7 +3,8 @@ import { useDispatch, useSelector } from 'react-redux'
 import { ListGroup, Modal } from 'react-bootstrap'
 import { createTimeslot, getTimeslots } from '../reducers/timeslot'
 import { getDoctors } from '../reducers/user'
-import SelectDropdown from '../components/SelectDropdown'
+import TimeslotForm from '../components/TimeslotForm'
+import TimeslotProfile from '../components/TimeSlotProfile'
 
 const Timeslots = () => {
   const dispatch = useDispatch()
@@ -28,6 +29,10 @@ const Timeslots = () => {
 
   const handleCloseModal = () => {
     setModalIsOpen(false)
+  }
+
+  const handleFormChange = (id, value) => {
+    setRegisterValue({ ...registerValue, [id]: value })
   }
 
   function handleDateChange (v) {
@@ -57,41 +62,21 @@ const Timeslots = () => {
 
   return (
     <div className='container marketing pt-5 d-flex flex-column'>
-      <div className='mb-5 mx-auto align-self-start'>
+      <div className='mb-2 align-self-start'>
         <button className='btn btn-info btn-lg' onClick={handleOpenModal}>
-          Add timeslot
+          Add procedure
         </button>
       </div>
 
       <Modal show={modalIsOpen} onHide={handleCloseModal}>
         <Modal.Header closeButton>
-          <Modal.Title>New timeslot</Modal.Title>
+          <Modal.Title> New Procedure</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <form className='my-4'>
-            <label>Start</label>
-            <input
-              type='datetime-local'
-              id='start'
-              autoFocus
-              className='form-control'
-              onChange={e => handleDateChange(e)}
-            />
-            <label>End</label>
-            <input
-              type='datetime-local'
-              id='end'
-              autoFocus
-              className='form-control'
-              onChange={e => handleDateChange(e)}
-            />
-            <SelectDropdown
-              header={'Doctor'}
-              formId='doctor'
-              options={['Placeholder', 'Name Surname']}
-              handleChange={handleNumericChange}
-            />
-          </form>
+          <TimeslotForm
+            onChange={handleFormChange}
+            formValues={registerValue}
+          />
         </Modal.Body>
         <Modal.Footer>
           <button
@@ -106,7 +91,7 @@ const Timeslots = () => {
             className='btn btn-info'
             onClick={handleRegisterClick}
           >
-            Save changes
+            Register Timeslot
           </button>
         </Modal.Footer>
       </Modal>
@@ -114,33 +99,7 @@ const Timeslots = () => {
       <div className='row'>
         <ListGroup>
           {timeslots?.map(timeslot => (
-            <ListGroup.Item key={timeslot.id}>
-              <div className='d-flex flex-row align-items-center gap-3'>
-                <div className='flex-grow-1'>
-                  <h2>
-                    {new Date(timeslot.start).toLocaleDateString('lt-LT')}
-                  </h2>
-                  <div>
-                    {new Date(timeslot.start).toLocaleTimeString('lt-LT', {
-                      hour: '2-digit',
-                      minute: '2-digit'
-                    })}{' '}
-                    -{' '}
-                    {new Date(timeslot.end).toLocaleTimeString('lt-LT', {
-                      hour: '2-digit',
-                      minute: '2-digit'
-                    })}
-                  </div>
-                  <div>Doctor Name</div>
-                </div>
-                <button type='button' className='btn btn-sm me-3'>
-                  Edit
-                </button>
-                <button type='button' className='btn btn-sm btn-danger me-3'>
-                  Delete
-                </button>
-              </div>
-            </ListGroup.Item>
+            <TimeslotProfile key={timeslot.id} timeslot={timeslot} />
           ))}
         </ListGroup>
       </div>
