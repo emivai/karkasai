@@ -1,47 +1,49 @@
-import React, { useState } from "react";
+import React, { useState } from 'react'
 
 const MultiSelectDropdown = ({ options, formValues, onChange }) => {
-  const [selectedOptions, setSelectedOptions] = useState([]);
-  const [isDropdownOpen, setDropdownOpen] = useState(false);
+  const [selectedOptions, setSelectedOptions] = useState([])
+  const [isDropdownOpen, setDropdownOpen] = useState(false)
 
   const toggleDropdown = () => {
-    setDropdownOpen(!isDropdownOpen);
-  };
+    setDropdownOpen(!isDropdownOpen)
+  }
 
-  const handleCheckboxChange = (option) => {
-    if (selectedOptions.includes(option)) {
-      setSelectedOptions(selectedOptions.filter((item) => item !== option));
-    } else {
-      setSelectedOptions([...selectedOptions, option]);
-    }
-    onChange("procedureId", selectedOptions);
-  };
+  const handleCheckboxChange = option => {
+    const updatedOptions = selectedOptions.includes(option)
+      ? selectedOptions.filter(item => item !== option)
+      : [...selectedOptions, option]
+
+    setSelectedOptions(updatedOptions)
+    onChange('procedureId', updatedOptions)
+  }
+
+  console.log(selectedOptions)
 
   return (
-    <div className="form-group row mb-2">
+    <div className='form-group row mb-2'>
       <div>
         <label>Procedures</label>
-        <div className="dropdown">
+        <div className='dropdown'>
           <button
-            className="btn btn-secondary dropdown-toggle w-100 bg-white text-dark text-truncate"
-            type="button"
+            className='btn btn-secondary dropdown-toggle w-100 bg-white text-dark text-truncate'
+            type='button'
             onClick={toggleDropdown}
           >
             Choose...
           </button>
           <div
-            className={`dropdown-menu${isDropdownOpen ? " show" : ""} w-100`}
+            className={`dropdown-menu${isDropdownOpen ? ' show' : ''} w-100`}
           >
-            {options?.map((option) => (
-              <div key={option.id} className="form-check ms-3">
+            {options?.map(option => (
+              <div key={option.id} className='form-check ms-3'>
                 <input
-                  className="form-check-input"
-                  type="checkbox"
+                  className='form-check-input'
+                  type='checkbox'
                   id={option.id}
                   checked={selectedOptions.includes(option.id)}
                   onChange={() => handleCheckboxChange(option.id)}
                 />
-                <label className="form-check-label" htmlFor={option.id}>
+                <label className='form-check-label' htmlFor={option.id}>
                   {option.name}
                 </label>
               </div>
@@ -50,7 +52,7 @@ const MultiSelectDropdown = ({ options, formValues, onChange }) => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default MultiSelectDropdown;
+export default MultiSelectDropdown
