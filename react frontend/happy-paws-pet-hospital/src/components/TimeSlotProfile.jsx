@@ -39,24 +39,25 @@ const TimeslotProfile = ({ timeslot }) => {
     await dispatch(deleteTimeslot(id))
     dispatch(getTimeslots())
   }
-
+  console.log(timeslot.doctorId)
   useEffect(() => {
     const fetchData = async () => {
+      if (timeslot && timeslot.doctorId && !users.doctor) {
+        await dispatch(getUser({ id: timeslot.doctorId }))
+      }
+
       if (timeslot) {
         setEditValue({
           start: timeslot.start,
           end: timeslot.end
         })
       }
-
-      if (timeslot && timeslot.usersId) {
-        await dispatch(getUser({ id: timeslot.usersId }))
-        console.log('Doctor Data:', users)
-      }
     }
 
     fetchData()
-  }, [timeslot, dispatch])
+  }, [timeslot, dispatch, users])
+
+  console.log(users)
 
   return (
     <ListGroup.Item>
@@ -99,7 +100,7 @@ const TimeslotProfile = ({ timeslot }) => {
             })}
           </div>
           <div>
-            {users?.doctor.name} {users?.doctor.surname}
+            {users?.doctor?.name} {users?.doctor?.surname}
           </div>
         </div>
         <button

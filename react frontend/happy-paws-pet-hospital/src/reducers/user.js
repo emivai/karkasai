@@ -28,18 +28,27 @@ const deleteUser = createAsyncThunk(namespace('deleteUser'), async payload => {
   await client.put(`users/${payload}`)
 })
 
-const getUser = createAsyncThunk(namespace('getUser'), async payload => {
-  if (Array.isArray(payload.id)) {
-    // If an array of ids is provided, fetch multiple users
-    const promises = payload.id.map(id => client.get(`users/${id}`))
-    const responses = await Promise.all(promises)
-    return responses.map(response => response.data)
-  } else {
-    // If a single id is provided, fetch a single user
-    const { data } = await client.get(`users/${payload.id}`)
-    return data
+const getUser = createAsyncThunk(
+  namespace('getUser'),
+  async (payload, { rejectWithValue }) => {
+    try {
+      if (Array.isArray(payload.id)) {
+        const promises = payload.id.map(id => client.get(`users/${id}`))
+        const responses = await Promise.all(promises)
+        console.log('User Responses:', responses)
+        return responses.map(response => response.data)
+      } else {
+        const { data } = await client.get(`users/${payload.id}`)
+        console.log('Single User Response:', data)
+        return data
+      }
+    } catch (error) {
+      // Handle errors appropriately
+      console.error('Error fetching user:', error.message)
+      return rejectWithValue(error.message)
+    }
   }
-})
+)
 
 const userSlice = createSlice({
   name: name,
