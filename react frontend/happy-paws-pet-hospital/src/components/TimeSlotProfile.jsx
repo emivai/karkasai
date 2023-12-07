@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { ListGroup } from 'react-bootstrap'
 import { Modal } from 'react-bootstrap'
 import {
@@ -7,10 +7,12 @@ import {
   deleteTimeslot,
   getTimeslots
 } from '../reducers/timeslot'
+import { getUser } from '../reducers/user'
 import TimeslotForm from './TimeslotForm'
 
 const TimeslotProfile = ({ timeslot }) => {
   const dispatch = useDispatch()
+  const doctor = useSelector(state => state.user)
 
   const [editValue, setEditValue] = useState()
   const [modalIsOpen, setModalIsOpen] = useState(false)
@@ -39,14 +41,21 @@ const TimeslotProfile = ({ timeslot }) => {
   }
 
   useEffect(() => {
-    if (timeslot) {
-      setEditValue({
-        start: timeslot.start,
-        end: timeslot.end,
-        doctor: timeslot.doctor
-      })
+    const fetchData = async () => {
+      if (timeslot) {
+        setEditValue({
+          start: timeslot.start,
+          end: timeslot.end
+        })
+      }
+
+      if (timeslot && timeslot.doctorId) {
+        await dispatch(getUser(timeslot.doctorId))
+      }
     }
-  }, [timeslot])
+
+    fetchData()
+  }, [timeslot, dispatch])
 
   return (
     <ListGroup.Item>
@@ -88,7 +97,7 @@ const TimeslotProfile = ({ timeslot }) => {
               minute: '2-digit'
             })}
           </div>
-          <div>Doctor Name</div>
+          <div>{doctor.Name}</div>
         </div>
         <button
           type='button'

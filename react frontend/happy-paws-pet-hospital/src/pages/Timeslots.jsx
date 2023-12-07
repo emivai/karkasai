@@ -64,13 +64,13 @@ const Timeslots = () => {
     <div className='container marketing pt-5 d-flex flex-column'>
       <div className='mb-2 align-self-start'>
         <button className='btn btn-info btn-lg' onClick={handleOpenModal}>
-          Add procedure
+          Add timeslot
         </button>
       </div>
 
       <Modal show={modalIsOpen} onHide={handleCloseModal}>
         <Modal.Header closeButton>
-          <Modal.Title> New Procedure</Modal.Title>
+          <Modal.Title> New Timeslot</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <TimeslotForm

@@ -1,5 +1,7 @@
 import React, { useState } from 'react'
-import SelectDropdown from '../components/SelectDropdown'
+import { useDispatch, useSelector } from 'react-redux'
+import { Form } from 'react-bootstrap'
+import moment from 'moment'
 
 const TimeslotForm = ({ onChange, formValues }) => {
   function handleChange (v) {
@@ -9,22 +11,11 @@ const TimeslotForm = ({ onChange, formValues }) => {
 
   function handleDateChange (v) {
     const { id, value } = v.target
-    onChange(id, new Date(value).toISOString())
-  }
 
-  function handleNumericChange (v) {
-    const { id, value } = v.target
-    const sanitizedValue = value.replace(/,/g, '.')
-    const validInputRegex = /^\d+(\.\d{0,2})?$/
+    // Use Moment.js to format the date to UTC
+    const formattedDate = moment(value).toISOString()
 
-    if (validInputRegex.test(sanitizedValue)) {
-      onChange(id, parseFloat(sanitizedValue))
-      setTimeslotError('')
-    } else {
-      setTimeslotError(
-        'Invalid input. Please enter a positive number with up to two decimal places.'
-      )
-    }
+    onChange(id, formattedDate)
   }
 
   return (
@@ -35,7 +26,11 @@ const TimeslotForm = ({ onChange, formValues }) => {
         id='start'
         autoFocus
         className='form-control'
-        value={formValues.start ?? 0}
+        value={
+          formValues.start
+            ? moment(formValues.start).format('YYYY-MM-DDTHH:mm')
+            : ''
+        }
         onChange={e => handleDateChange(e)}
       />
       <label>End</label>
@@ -44,15 +39,12 @@ const TimeslotForm = ({ onChange, formValues }) => {
         id='end'
         autoFocus
         className='form-control'
-        value={formValues.end ?? 0}
+        value={
+          formValues.end
+            ? moment(formValues.end).format('YYYY-MM-DDTHH:mm')
+            : ''
+        }
         onChange={e => handleDateChange(e)}
-      />
-      <SelectDropdown
-        header={'Doctor'}
-        formId='doctor'
-        options={['Placeholder', 'Name Surname']}
-        value={formValues.doctor ?? 0}
-        handleChange={handleNumericChange}
       />
     </form>
   )

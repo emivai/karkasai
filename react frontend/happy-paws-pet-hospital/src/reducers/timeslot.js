@@ -13,6 +13,13 @@ const getTimeslots = createAsyncThunk(namespace('gettimeslots'), async () => {
   return data
 })
 
+const createTimeslot = createAsyncThunk(
+  namespace('createTimeslot'),
+  async payload => {
+    await client.post('timeslots', payload)
+  }
+)
+
 const getTimeslotsByDoctorId = createAsyncThunk(
   namespace('getTimeslotsByDoctorId'),
   async payload => {
@@ -61,5 +68,6 @@ export {
   createTimeslot,
   deleteTimeslot,
   editTimeslot,
-  timeslotSlice
+  timeslotSlice,
+  getTimeslotsByDoctorId
 }
