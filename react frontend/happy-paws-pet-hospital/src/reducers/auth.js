@@ -43,7 +43,7 @@ const authSlice = createSlice({
         return {
           ...state,
           userData: payload.payload.user,
-          role: payload.payload.role,
+          role: payload.payload.user.type,
           isLoggedIn: true,
         };
       })

@@ -22,17 +22,6 @@ const AppointmentForm = ({ pet, onChange, formValues }) => {
     onChange(id, value);
   }
 
-  function handleNumericChange(v) {
-    console.log(v);
-    const { id, value } = v.target;
-    onChange(id, Number(value));
-  }
-
-  function handleDateChange(v) {
-    const { id, value } = v.target;
-    onChange(id, new Date(value).toISOString());
-  }
-
   useEffect(() => {
     dispatch(getDoctors());
     dispatch(getProcedures());

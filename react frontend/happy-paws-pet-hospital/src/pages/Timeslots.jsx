@@ -1,72 +1,76 @@
-import React, { useEffect, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { ListGroup, Modal } from 'react-bootstrap'
-import { createTimeslot, getTimeslots } from '../reducers/timeslot'
-import { getDoctors } from '../reducers/user'
-import TimeslotForm from '../components/TimeslotForm'
-import TimeslotProfile from '../components/TimeSlotProfile'
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { ListGroup, Modal } from "react-bootstrap";
+import { createTimeslot, getTimeslots } from "../reducers/timeslot";
+import { getDoctors } from "../reducers/user";
+import TimeslotForm from "../components/TimeslotForm";
+import TimeslotProfile from "../components/TimeSlotProfile";
 
 const Timeslots = () => {
-  const dispatch = useDispatch()
-  const { timeslots } = useSelector(state => state.timeslot)
-  const { doctors } = useSelector(state => state.user)
-  const [modalIsOpen, setModalIsOpen] = useState(false)
+  const dispatch = useDispatch();
 
-  function handleRegisterChange (v) {
-    const { id, value } = v.target
-    setRegisterValue({ ...registerValue, [id]: value })
+  const role = useSelector((state) => state.auth.role);
+  const { timeslots } = useSelector((state) => state.timeslot);
+  const { doctors } = useSelector((state) => state.user);
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+
+  function handleRegisterChange(v) {
+    const { id, value } = v.target;
+    setRegisterValue({ ...registerValue, [id]: value });
   }
 
   const handleRegisterClick = async () => {
-    await dispatch(createTimeslot(registerValue))
-    handleCloseModal()
-    refreshTimeslots()
-  }
+    await dispatch(createTimeslot(registerValue));
+    handleCloseModal();
+    refreshTimeslots();
+  };
 
   const handleOpenModal = () => {
-    setModalIsOpen(true)
-  }
+    setModalIsOpen(true);
+  };
 
   const handleCloseModal = () => {
-    setModalIsOpen(false)
-  }
+    setModalIsOpen(false);
+  };
 
   const handleFormChange = (id, value) => {
-    setRegisterValue({ ...registerValue, [id]: value })
+    setRegisterValue({ ...registerValue, [id]: value });
+  };
+
+  function handleDateChange(v) {
+    const { id, value } = v.target;
+    setRegisterValue({ ...registerValue, [id]: new Date(value).toISOString() });
   }
 
-  function handleDateChange (v) {
-    const { id, value } = v.target
-    setRegisterValue({ ...registerValue, [id]: new Date(value).toISOString() })
+  function handleNumericChange(v) {
+    const { id, value } = v.target;
+    setRegisterValue({ ...registerValue, [id]: Number(value - 1) });
   }
 
-  function handleNumericChange (v) {
-    const { id, value } = v.target
-    setRegisterValue({ ...registerValue, [id]: Number(value - 1) })
+  function refreshTimeslots() {
+    dispatch(getTimeslots());
   }
 
-  function refreshTimeslots () {
-    dispatch(getTimeslots())
-  }
-
-  useEffect(() => {
-    dispatch(getTimeslots())
-    dispatch(getDoctors())
-  }, [dispatch])
+  // useEffect(() => {
+  //   dispatch(getTimeslots());
+  //   dispatch(getDoctors());
+  // }, [dispatch]);
 
   const [registerValue, setRegisterValue] = useState({
     start: null,
     end: null,
-    doctor: ''
-  })
+    doctor: "",
+  });
 
   return (
-    <div className='container marketing pt-5 d-flex flex-column'>
-      <div className='mb-2 align-self-start'>
-        <button className='btn btn-info btn-lg' onClick={handleOpenModal}>
-          Add timeslot
-        </button>
-      </div>
+    <div className="container marketing pt-5 d-flex flex-column">
+      {(role === 0 || role === 1) && (
+        <div className="mb-2 align-self-start">
+          <button className="btn btn-info btn-lg" onClick={handleOpenModal}>
+            Add timeslot
+          </button>
+        </div>
+      )}
 
       <Modal show={modalIsOpen} onHide={handleCloseModal}>
         <Modal.Header closeButton>
@@ -80,15 +84,15 @@ const Timeslots = () => {
         </Modal.Body>
         <Modal.Footer>
           <button
-            type='button'
-            className='btn btn-secondary'
+            type="button"
+            className="btn btn-secondary"
             onClick={handleCloseModal}
           >
             Close
           </button>
           <button
-            type='button'
-            className='btn btn-info'
+            type="button"
+            className="btn btn-info"
             onClick={handleRegisterClick}
           >
             Register Timeslot
@@ -96,15 +100,15 @@ const Timeslots = () => {
         </Modal.Footer>
       </Modal>
 
-      <div className='row'>
+      <div className="row">
         <ListGroup>
-          {timeslots?.map(timeslot => (
+          {timeslots?.map((timeslot) => (
             <TimeslotProfile key={timeslot.id} timeslot={timeslot} />
           ))}
         </ListGroup>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Timeslots
+export default Timeslots;
