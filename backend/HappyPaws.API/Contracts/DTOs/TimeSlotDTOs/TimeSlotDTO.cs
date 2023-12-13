@@ -1,4 +1,5 @@
-﻿using HappyPaws.Core.Entities;
+﻿using HappyPaws.API.Contracts.DTOs.UserDTOs;
+using HappyPaws.Core.Entities;
 
 namespace HappyPaws.API.Contracts.DTOs.TimeSlotDTOs
 {
@@ -9,6 +10,7 @@ namespace HappyPaws.API.Contracts.DTOs.TimeSlotDTOs
         public DateTime End { get; set; }
         public bool Available { get; set; }
         public Guid DoctorId { get; set; }
+        public UserDTO? Doctor {  get; set; }
 
         public static TimeSlotDTO FromDomain(TimeSlot timeSlot)
         {
@@ -18,7 +20,7 @@ namespace HappyPaws.API.Contracts.DTOs.TimeSlotDTOs
                 Start = timeSlot.Start,
                 End = timeSlot.End,
                 Available = timeSlot.Available,
-                DoctorId = timeSlot.UserId
+                Doctor = UserDTO.FromDomain(timeSlot.Doctor)
             };
         }
     }

@@ -35,13 +35,13 @@ namespace HappyPaws.Infrastructure.Persistence.Repositories
         public async Task<List<TimeSlot>> GetAllAsync(Guid? doctorId = null)
         {
             if(doctorId != null)
-                return await _context.TimeSlots.Where(t => t.Start > DateTime.UtcNow && t.Available == true && t.UserId == doctorId).ToListAsync();
-            return await _context.TimeSlots.Where(t => t.Start > DateTime.UtcNow && t.Available == true).ToListAsync();
+                return await _context.TimeSlots.Include(t => t.Doctor).Where(t => t.Start > DateTime.UtcNow && t.Available == true && t.UserId == doctorId).ToListAsync();
+            return await _context.TimeSlots.Include(t => t.Doctor).Where(t => t.Start > DateTime.UtcNow && t.Available == true).ToListAsync();
         }
 
         public async Task<TimeSlot> GetAsync(Guid id)
         {
-            return await _context.TimeSlots.FirstOrDefaultAsync(p => p.Id == id);
+            return await _context.TimeSlots.Include(t => t.Doctor).FirstOrDefaultAsync(p => p.Id == id);
         }
 
         public async Task<TimeSlot> UpdateAsync(Guid id, TimeSlot timeSlot)

@@ -36,7 +36,7 @@ namespace HappyPaws.Infrastructure.Persistence.Repositories
         public async Task<List<Appointment>> GetAllAsync(Guid petId)
         {
             return await _context.Appointments
-                .Include(a => a.TimeSlot)
+                .Include(a => a.TimeSlot).ThenInclude(t => t.Doctor)
                 .Include(a => a.AppointmentProcedures).ThenInclude(p => p.Procedure)
                 .Include(a => a.Notes)
                 .Include(a => a.User)
@@ -48,7 +48,7 @@ namespace HappyPaws.Infrastructure.Persistence.Repositories
         public async Task<List<Appointment>> GetAllForDoctorAsync(Guid petId, Guid doctorId)
         {
             return await _context.Appointments
-                .Include(a => a.TimeSlot)
+                .Include(a => a.TimeSlot).ThenInclude(t => t.Doctor)
                 .Include(a => a.AppointmentProcedures).ThenInclude(p => p.Procedure)
                 .Include(a => a.Notes)
                 .Include(a => a.User)
