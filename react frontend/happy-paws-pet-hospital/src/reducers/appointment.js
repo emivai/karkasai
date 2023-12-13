@@ -20,18 +20,25 @@ const getAppointments = createAsyncThunk(
 const createAppointment = createAsyncThunk(
   namespace("createAppointment"),
   async (payload, { dispatch }) => {
-    const { id } = await client.post(`pets/${payload.petId}/appointments`, {
+    const {
+      data: { id },
+    } = await client.post(`pets/${payload.petId}/appointments`, {
       timeSlotId: payload.timeSlotId,
     });
 
-    payload.procedureId.forEach(async (procedureId) => {
-      await dispatch(
-        createAppointmentProcedure({
-          appointmentId: id,
-          procedureId: procedureId,
-        })
-      );
-    });
+    console.log("test", id, payload);
+
+    await Promise.all(
+      payload.procedureIds.map(async (procedureId) => {
+        console.log("fist", procedureId);
+        await dispatch(
+          createAppointmentProcedure({
+            appointmentId: id,
+            procedureId,
+          })
+        );
+      })
+    );
   }
 );
 

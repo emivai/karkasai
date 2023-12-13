@@ -12,7 +12,7 @@ const getAppointmentProcedures = createAsyncThunk(
   namespace("getAppointmentProcedures"),
   async (payload) => {
     const { data } = await client.get(
-      `/appointments/${payload.appointmentId}/appointmentProcedures`
+      `appointments/${payload.appointmentId}/appointmentProcedures`
     );
     return data;
   }
@@ -21,9 +21,10 @@ const getAppointmentProcedures = createAsyncThunk(
 const createAppointmentProcedure = createAsyncThunk(
   namespace("createAppointmentProcedure"),
   async (payload) => {
+    console.log("second", payload);
     await client.post(
-      `/appointments/${payload.appointmentId}/appointmentProcedures`,
-      payload.procedureId
+      `appointments/${payload.appointmentId}/appointmentProcedures`,
+      { procedureId: payload.procedureId }
     );
   }
 );
@@ -32,7 +33,7 @@ const editAppointmentProcedure = createAsyncThunk(
   namespace("editAppointmentProcedure"),
   async (payload) => {
     await client.put(
-      `/appointments/${payload.appointmentId}/appointmentProcedures/${payload.id}`,
+      `appointments/${payload.appointmentId}/appointmentProcedures/${payload.id}`,
       payload.value
     );
   }
@@ -42,7 +43,7 @@ const deleteAppointmentProcedure = createAsyncThunk(
   namespace("deleteAppointmentProcedure"),
   async (payload) => {
     await client.delete(
-      `/appointments/${payload.appointmentId}/appointmentProcedures/${payload.id}`
+      `appointments/${payload.appointmentId}/appointmentProcedures/${payload.id}`
     );
   }
 );
