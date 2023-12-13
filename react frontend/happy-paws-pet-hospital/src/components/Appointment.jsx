@@ -17,8 +17,6 @@ const Appointment = ({
 
   const [statusStyle, setStatusStyle] = useState("primary");
 
-  console.log("test", time, status, petName, doctorName, procedures);
-
   return (
     <div className="col-12 mt-3">
       <div className="card">

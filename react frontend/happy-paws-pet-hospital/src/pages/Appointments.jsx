@@ -56,8 +56,6 @@ const Appointments = () => {
     dispatch(getAppointments({ id: state.id }));
   }, [dispatch]);
 
-  console.log(appointments);
-
   return (
     <>
       <div className="text-center mt-5">
@@ -103,11 +101,15 @@ const Appointments = () => {
             <Appointment
               key={appointment.id}
               time={
-                new Date(appointment.timeSlot.start).toLocaleDateString(
-                  "lt-LT"
-                ) +
+                new Date(appointment.timeSlot.start)
+                  .toISOString()
+                  .slice(0, 16)
+                  .replace("T", " ") +
                 " | " +
-                new Date(appointment.timeSlot.end).toLocaleDateString("lt-LT")
+                new Date(appointment.timeSlot.end)
+                  .toISOString()
+                  .slice(0, 16)
+                  .replace("T", " ")
               }
               status={getAppointmentStatus(appointment.status)}
               petName={appointment.pet.name}
