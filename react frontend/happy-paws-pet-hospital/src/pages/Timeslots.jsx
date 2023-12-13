@@ -62,7 +62,7 @@ const Timeslots = () => {
 
   return (
     <div className="container marketing pt-5 d-flex flex-column">
-      {(role === 0 || role === 1) && (
+      {(role === 0 || role === 2) && (
         <div className="mb-2 align-self-start">
           <button className="btn btn-info btn-lg" onClick={handleOpenModal}>
             Add timeslot
