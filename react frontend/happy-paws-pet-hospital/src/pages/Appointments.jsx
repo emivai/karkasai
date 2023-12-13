@@ -23,7 +23,7 @@ const Appointments = () => {
   const [createValues, setCreateValues] = useState({ petId: state.id })
   const { appointments } = useSelector(state => state.appointment)
   const dispatch = useDispatch()
-  const users = useSelector(state => state.user)
+  const role = useSelector(state => state.auth.role)
 
   function handleOpenModal () {
     setIsOpen(true)
@@ -60,13 +60,15 @@ const Appointments = () => {
   return (
     <>
       <div className='text-center mt-5'>
-        <button
-          type='button'
-          className='btn btn-info btn-lg'
-          onClick={handleOpenModal}
-        >
-          Schedule New Appointment
-        </button>
+        {(role === 1 || role === 0) && (
+          <button
+            type='button'
+            className='btn btn-info btn-lg'
+            onClick={handleOpenModal}
+          >
+            Schedule New Appointment
+          </button>
+        )}
       </div>
       <Modal show={modalIsOpen} onHide={handleCloseModal}>
         <Modal.Header closeButton>

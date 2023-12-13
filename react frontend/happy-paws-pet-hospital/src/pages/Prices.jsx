@@ -9,6 +9,7 @@ const Prices = () => {
   const dispatch = useDispatch()
   const { procedures } = useSelector(state => state.procedure)
   const [modalIsOpen, setModalIsOpen] = useState(false)
+  const role = useSelector(state => state.auth.role)
 
   const handleOpenModal = () => {
     setModalIsOpen(true)
@@ -40,11 +41,13 @@ const Prices = () => {
 
   return (
     <div className='container marketing pt-5 d-flex flex-column'>
-      <div className='mb-2 align-self-start'>
-        <button className='btn btn-info btn-lg' onClick={handleOpenModal}>
-          Add procedure
-        </button>
-      </div>
+      {role === 0 && (
+        <div className='mb-2 align-self-start'>
+          <button className='btn btn-info btn-lg' onClick={handleOpenModal}>
+            Add procedure
+          </button>
+        </div>
+      )}
 
       <Modal show={modalIsOpen} onHide={handleCloseModal}>
         <Modal.Header closeButton>

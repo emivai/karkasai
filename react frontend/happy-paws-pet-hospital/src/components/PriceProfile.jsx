@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { ListGroup } from 'react-bootstrap'
 import { Modal } from 'react-bootstrap'
 import {
@@ -11,6 +11,7 @@ import PriceForm from './PriceForm'
 
 const PriceProfile = ({ procedure }) => {
   const dispatch = useDispatch()
+  const role = useSelector(state => state.auth.role)
 
   const [editValue, setEditValue] = useState()
   const [modalIsOpen, setModalIsOpen] = useState(false)
@@ -80,20 +81,24 @@ const PriceProfile = ({ procedure }) => {
           <div>Price: {procedure.price} eur</div>
           <div>{procedure.description}</div>
         </div>
-        <button
-          type='button'
-          className='btn btn-sm me-3'
-          onClick={handleOpenModal}
-        >
-          Edit
-        </button>
-        <button
-          type='button'
-          className='btn btn-sm btn-danger me-3'
-          onClick={() => handleDeleteClick(procedure.id)}
-        >
-          Delete
-        </button>
+        {role === 0 && (
+          <>
+            <button
+              type='button'
+              className='btn btn-sm me-3'
+              onClick={handleOpenModal}
+            >
+              Edit
+            </button>
+            <button
+              type='button'
+              className='btn btn-sm btn-danger me-3'
+              onClick={() => handleDeleteClick(procedure.id)}
+            >
+              Delete
+            </button>
+          </>
+        )}
       </div>
     </ListGroup.Item>
   )

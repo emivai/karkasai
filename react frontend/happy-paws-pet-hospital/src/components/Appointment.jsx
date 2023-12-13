@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 
 const Appointment = ({
   time,
@@ -16,6 +17,7 @@ const Appointment = ({
   }, [])
 
   const [statusStyle, setStatusStyle] = useState('primary')
+  const role = useSelector(state => state.auth.role)
 
   return (
     <div className='col-12 mt-3'>
@@ -34,9 +36,11 @@ const Appointment = ({
                 </button>
               </>
             )}
-            <button type='button' className='btn btn-danger mr-2'>
-              Delete
-            </button>
+            {(role === 0 || role === 1) && (
+              <button type='button' className='btn btn-danger mr-2'>
+                Delete
+              </button>
+            )}
           </div>
         </div>
       </div>

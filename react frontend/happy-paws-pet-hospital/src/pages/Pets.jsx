@@ -1,51 +1,55 @@
-import { useEffect, useState } from "react";
-import PetProfile from "../components/PetProfile";
-import { useDispatch, useSelector } from "react-redux";
-import { createPet, getPets } from "../reducers/pet";
-import { ListGroup, Modal } from "react-bootstrap";
-import PetForm from "../components/PetForm";
+import { useEffect, useState } from 'react'
+import PetProfile from '../components/PetProfile'
+import { useDispatch, useSelector } from 'react-redux'
+import { createPet, getPets } from '../reducers/pet'
+import { ListGroup, Modal } from 'react-bootstrap'
+import PetForm from '../components/PetForm'
 
 const Pets = () => {
-  const dispatch = useDispatch();
-  const { pets } = useSelector((state) => state.pet);
-  const [modalIsOpen, setModalIsOpen] = useState(false);
+  const dispatch = useDispatch()
+  const { pets } = useSelector(state => state.pet)
+  const [modalIsOpen, setModalIsOpen] = useState(false)
+  const role = useSelector(state => state.auth.role)
 
   const handleOpenModal = () => {
-    setModalIsOpen(true);
-  };
+    setModalIsOpen(true)
+  }
 
   const handleCloseModal = () => {
-    setModalIsOpen(false);
-  };
+    setModalIsOpen(false)
+  }
 
   const [registerValue, setRegisterValue] = useState({
-    name: "",
+    name: '',
     type: 0,
     birthdate: new Date(),
-    photo: "",
-  });
+    photo: ''
+  })
 
   const handleRegisterClick = async () => {
-    await dispatch(createPet(registerValue));
-    handleCloseModal();
-    dispatch(getPets());
-  };
+    await dispatch(createPet(registerValue))
+    handleCloseModal()
+    dispatch(getPets())
+  }
 
   const handleFormChange = (id, value) => {
-    setRegisterValue({ ...registerValue, [id]: value });
-  };
+    setRegisterValue({ ...registerValue, [id]: value })
+  }
 
   useEffect(() => {
-    dispatch(getPets());
-  }, [dispatch]);
+    dispatch(getPets())
+  }, [dispatch])
 
   return (
-    <div className="container marketing pt-5 d-flex flex-column">
-      <div className="mb-2 align-self-start">
-        <button className="btn btn-info btn-lg" onClick={handleOpenModal}>
-          Add pet
-        </button>
-      </div>
+    <div className='container marketing pt-5 d-flex flex-column'>
+      {role === 0 ||
+        (role === 1 && (
+          <div className='mb-2 align-self-start'>
+            <button className='btn btn-info btn-lg' onClick={handleOpenModal}>
+              Add pet
+            </button>
+          </div>
+        ))}
 
       <Modal show={modalIsOpen} onHide={handleCloseModal}>
         <Modal.Header closeButton>
@@ -56,15 +60,15 @@ const Pets = () => {
         </Modal.Body>
         <Modal.Footer>
           <button
-            type="button"
-            className="btn btn-secondary"
+            type='button'
+            className='btn btn-secondary'
             onClick={handleCloseModal}
           >
             Close
           </button>
           <button
-            type="button"
-            className="btn btn-info"
+            type='button'
+            className='btn btn-info'
             onClick={handleRegisterClick}
           >
             Register Pet
@@ -72,15 +76,15 @@ const Pets = () => {
         </Modal.Footer>
       </Modal>
 
-      <div className="row">
+      <div className='row'>
         <ListGroup>
-          {pets?.map((pet) => (
+          {pets?.map(pet => (
             <PetProfile key={pet.id} pet={pet} />
           ))}
         </ListGroup>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Pets;
+export default Pets

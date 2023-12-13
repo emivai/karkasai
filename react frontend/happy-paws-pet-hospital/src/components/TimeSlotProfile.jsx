@@ -7,12 +7,11 @@ import {
   deleteTimeslot,
   getTimeslots
 } from '../reducers/timeslot'
-import { getUser } from '../reducers/user'
 import TimeslotForm from './TimeslotForm'
 
 const TimeslotProfile = ({ timeslot }) => {
   const dispatch = useDispatch()
-  const users = useSelector(state => state.user)
+  const role = useSelector(state => state.auth.role)
 
   const [editValue, setEditValue] = useState()
   const [modalIsOpen, setModalIsOpen] = useState(false)
@@ -84,20 +83,24 @@ const TimeslotProfile = ({ timeslot }) => {
             Doctor: {timeslot.doctor.name} {timeslot.doctor.surname}
           </div>
         </div>
-        <button
-          type='button'
-          className='btn btn-sm me-3'
-          onClick={handleOpenModal}
-        >
-          Edit
-        </button>
-        <button
-          type='button'
-          className='btn btn-sm btn-danger me-3'
-          onClick={() => handleDeleteClick(timeslot.id)}
-        >
-          Delete
-        </button>
+        {(role === 0 || role === 2) && (
+          <>
+            <button
+              type='button'
+              className='btn btn-sm me-3'
+              onClick={handleOpenModal}
+            >
+              Edit
+            </button>
+            <button
+              type='button'
+              className='btn btn-sm btn-danger me-3'
+              onClick={() => handleDeleteClick(timeslot.id)}
+            >
+              Delete
+            </button>
+          </>
+        )}
       </div>
     </ListGroup.Item>
   )
