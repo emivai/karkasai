@@ -11,7 +11,6 @@ const Timeslots = () => {
 
   const role = useSelector((state) => state.auth.role);
   const { timeslots } = useSelector((state) => state.timeslot);
-  const { doctors } = useSelector((state) => state.user);
   const [modalIsOpen, setModalIsOpen] = useState(false);
 
   function handleRegisterChange(v) {
@@ -51,10 +50,9 @@ const Timeslots = () => {
     dispatch(getTimeslots());
   }
 
-  // useEffect(() => {
-  //   dispatch(getTimeslots());
-  //   dispatch(getDoctors());
-  // }, [dispatch]);
+  useEffect(() => {
+    dispatch(getTimeslots());
+  }, [dispatch]);
 
   const [registerValue, setRegisterValue] = useState({
     start: null,

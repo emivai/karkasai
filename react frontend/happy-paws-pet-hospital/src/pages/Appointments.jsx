@@ -11,6 +11,12 @@ import { createAppointment, getAppointments } from "../reducers/appointment";
 import { getUser } from "../reducers/user";
 import { createAppointmentProcedure } from "../reducers/appointmentprocedure";
 
+const appointmentStatus = {
+  0: "Scheduled",
+  1: "Cancelled",
+  2: "Done",
+};
+
 const Appointments = () => {
   const { state } = useLocation();
   const [modalIsOpen, setIsOpen] = useState(false);
@@ -31,6 +37,10 @@ const Appointments = () => {
     setCreateValues({ ...createValues, [id]: value });
   };
 
+  const getAppointmentStatus = (value) => {
+    return appointmentStatus[value];
+  };
+
   const handleBookClick = async () => {
     await dispatch(
       createAppointment({
@@ -44,8 +54,9 @@ const Appointments = () => {
 
   useEffect(() => {
     dispatch(getAppointments({ id: state.id }));
-    dispatch(getUser({ id: state.userId }));
   }, [dispatch]);
+
+  console.log(appointments);
 
   return (
     <>
@@ -88,57 +99,25 @@ const Appointments = () => {
       </Modal>
       <div className="container d-flex align-items-center">
         <div className="row mt-3">
-          <Appointment
-            time={"2023-11-25 13:00-14:00"}
-            status={"Scheduled"}
-            petName={"Nancy"}
-            doctorName={"Sarah Smith"}
-            procedures={
-              "Procedures: Feline infectious peritonitis (FIP) vaccination"
-            }
-          />
-          <Appointment
-            time={"2023-10-30 10:30-11:30"}
-            status={"Scheduled"}
-            petName={"Oreo"}
-            doctorName={"Lily Anderson"}
-            procedures={"Dental extraction"}
-          />
-          <Appointment
-            time={"2022-09-13 12:30-13:30"}
-            status={"Cancelled"}
-            petName={"Dave"}
-            doctorName={"Liam Herwig"}
-            procedures={"Wellness exam"}
-          />
-          <Appointment
-            time={"2022-09-13 12:30-13:30"}
-            status={"Cancelled"}
-            petName={"Dave"}
-            doctorName={"Liam Herwig"}
-            procedures={"Wellness exam"}
-          />
-          <Appointment
-            time={"2022-09-13 12:30-13:30"}
-            status={"Done"}
-            petName={"Smudge"}
-            doctorName={"Liam Herwig"}
-            procedures={"Wellness exam, Nail trim"}
-          />
+          {appointments?.map((appointment) => (
+            <Appointment
+              key={appointment.id}
+              time={
+                new Date(appointment.timeSlot.start).toLocaleDateString(
+                  "lt-LT"
+                ) +
+                " | " +
+                new Date(appointment.timeSlot.end).toLocaleDateString("lt-LT")
+              }
+              status={getAppointmentStatus(appointment.status)}
+              petName={appointment.pet.name}
+              doctorName={appointment.timeSlot.doctor.name}
+              procedures={appointment.appointmentProcedures
+                .map((procedure) => procedure.procedure.name)
+                .join(", ")}
+            />
+          ))}
         </div>
-        {/* <div className='row mt-3'>
-          {appointments &&
-            appointments.map(appointment => (
-              <Appointment
-                key={appointment.id} // Make sure to provide a unique key
-                time={`${appointment.startTime} - ${appointment.endTime}`}
-                status={appointment.status}
-                petName={appointment.petName}
-                doctorName={appointment.doctorName}
-                procedures={appointment.procedures}
-              />
-            ))}
-        </div> */}
       </div>
     </>
   );

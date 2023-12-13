@@ -86,7 +86,7 @@ namespace HappyPaws.API.Controllers
 
             if (!authResult.Succeeded)
             {
-                return Forbid();
+                return Forbid();    
             }
 
             var userId = GetUserId();

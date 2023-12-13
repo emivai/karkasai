@@ -40,23 +40,6 @@ const TimeslotProfile = ({ timeslot }) => {
     dispatch(getTimeslots());
   };
 
-  useEffect(() => {
-    const fetchData = async () => {
-      if (timeslot && timeslot.doctorId && !users.doctor) {
-        await dispatch(getUser({ id: timeslot.doctorId }));
-      }
-
-      if (timeslot) {
-        setEditValue({
-          start: timeslot.start,
-          end: timeslot.end,
-        });
-      }
-    };
-
-    fetchData();
-  }, [timeslot, dispatch, users]);
-
   return (
     <ListGroup.Item>
       <Modal show={modalIsOpen} onHide={handleCloseModal}>
@@ -98,7 +81,7 @@ const TimeslotProfile = ({ timeslot }) => {
             })}
           </div>
           <div>
-            {users?.doctor?.name} {users?.doctor?.surname}
+            {timeslot.doctor.name} {timeslot.doctor.surname}
           </div>
         </div>
         <button
