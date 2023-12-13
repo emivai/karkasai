@@ -9,7 +9,6 @@ namespace HappyPaws.API.Contracts.DTOs.TimeSlotDTOs
         public DateTime Start { get; set; }
         public DateTime End { get; set; }
         public bool Available { get; set; }
-        public Guid DoctorId { get; set; }
         public UserDTO? Doctor {  get; set; }
 
         public static TimeSlotDTO FromDomain(TimeSlot timeSlot)
