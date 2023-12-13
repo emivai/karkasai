@@ -43,6 +43,11 @@ namespace HappyPaws.Infrastructure.Persistence.Repositories
             return await _context.Appointments.Include(a => a.TimeSlot).Include(a => a.AppointmentProcedures).ThenInclude(p => p.Procedure).Where(a => a.PetId == petId && a.TimeSlot.UserId == doctorId).ToListAsync();
         }
 
+        public async Task<List<Appointment>> GetAllOutdatedAsync()
+        {
+            return await _context.Appointments.Include(a => a.TimeSlot).Where(a => a.TimeSlot.End < DateTime.UtcNow).ToListAsync();
+        }
+
         public async Task<Appointment> GetAsync(Guid id)
         {
             return await _context.Appointments.Include(a => a.TimeSlot).Include(a => a.AppointmentProcedures).ThenInclude(p => p.Procedure).FirstOrDefaultAsync(p => p.Id == id);

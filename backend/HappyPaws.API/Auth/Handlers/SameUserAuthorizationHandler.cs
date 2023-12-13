@@ -1,5 +1,4 @@
 ﻿using HappyPaws.Core.Entities;
-using HappyPaws.Core.Entities.Common;
 using HappyPaws.Core.Enums;
 using Microsoft.AspNetCore.Authorization;
 
