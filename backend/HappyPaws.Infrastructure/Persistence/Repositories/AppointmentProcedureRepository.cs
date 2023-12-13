@@ -35,12 +35,12 @@ namespace HappyPaws.Infrastructure.Persistence.Repositories
 
         public async Task<List<AppointmentProcedure>> GetAllAsync(Guid appointmentId)
         {
-            return await _context.AppointmentProcedures.Where(a => a.AppointmentId == appointmentId).ToListAsync();
+            return await _context.AppointmentProcedures.Where(a => a.AppointmentId == appointmentId).Include(a => a.Procedure).ToListAsync();
         }
 
         public async Task<AppointmentProcedure> GetAsync(Guid id)
         {
-            return await _context.AppointmentProcedures.FirstOrDefaultAsync(p => p.Id == id);
+            return await _context.AppointmentProcedures.Include(a => a.Procedure).FirstOrDefaultAsync(p => p.Id == id);
         }
 
         public async Task<AppointmentProcedure> UpdateAsync(Guid id, AppointmentProcedure appointmentProcedure)

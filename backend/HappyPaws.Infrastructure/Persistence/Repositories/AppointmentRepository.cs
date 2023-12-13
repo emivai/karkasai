@@ -35,12 +35,26 @@ namespace HappyPaws.Infrastructure.Persistence.Repositories
 
         public async Task<List<Appointment>> GetAllAsync(Guid petId)
         {
-            return await _context.Appointments.Where(a => a.PetId == petId).Include(a => a.TimeSlot).Include(a => a.AppointmentProcedures).ThenInclude(p => p.Procedure).ToListAsync();
+            return await _context.Appointments
+                .Include(a => a.TimeSlot)
+                .Include(a => a.AppointmentProcedures).ThenInclude(p => p.Procedure)
+                .Include(a => a.Notes)
+                .Include(a => a.User)
+                .Include(a => a.Pet)
+                .Where(a => a.PetId == petId)
+                .ToListAsync();
         }
 
         public async Task<List<Appointment>> GetAllForDoctorAsync(Guid petId, Guid doctorId)
         {
-            return await _context.Appointments.Include(a => a.TimeSlot).Include(a => a.AppointmentProcedures).ThenInclude(p => p.Procedure).Where(a => a.PetId == petId && a.TimeSlot.UserId == doctorId).ToListAsync();
+            return await _context.Appointments
+                .Include(a => a.TimeSlot)
+                .Include(a => a.AppointmentProcedures).ThenInclude(p => p.Procedure)
+                .Include(a => a.Notes)
+                .Include(a => a.User)
+                .Include(a => a.Pet)
+                .Where(a => a.PetId == petId && a.TimeSlot.UserId == doctorId)
+                .ToListAsync();
         }
 
         public async Task<List<Appointment>> GetAllOutdatedAsync()
@@ -50,7 +64,13 @@ namespace HappyPaws.Infrastructure.Persistence.Repositories
 
         public async Task<Appointment> GetAsync(Guid id)
         {
-            return await _context.Appointments.Include(a => a.TimeSlot).Include(a => a.AppointmentProcedures).ThenInclude(p => p.Procedure).FirstOrDefaultAsync(p => p.Id == id);
+            return await _context.Appointments
+                .Include(a => a.TimeSlot)
+                .Include(a => a.AppointmentProcedures).ThenInclude(p => p.Procedure)
+                .Include(a => a.Notes)
+                .Include(a => a.User)
+                .Include(a => a.Pet)
+                .FirstOrDefaultAsync(p => p.Id == id);
         }
 
         public async Task<Appointment> UpdateAsync(Guid id, Appointment appointment)

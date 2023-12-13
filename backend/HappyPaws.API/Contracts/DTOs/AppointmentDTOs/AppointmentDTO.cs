@@ -1,4 +1,9 @@
-﻿using HappyPaws.Core.Entities;
+﻿using HappyPaws.API.Contracts.DTOs.AppointmentProcedureDTOs;
+using HappyPaws.API.Contracts.DTOs.NoteDTOs;
+using HappyPaws.API.Contracts.DTOs.PetDTOs;
+using HappyPaws.API.Contracts.DTOs.TimeSlotDTOs;
+using HappyPaws.API.Contracts.DTOs.UserDTOs;
+using HappyPaws.Core.Entities;
 using HappyPaws.Core.Enums;
 
 namespace HappyPaws.API.Contracts.DTOs.AppointmentDTOs
@@ -8,10 +13,11 @@ namespace HappyPaws.API.Contracts.DTOs.AppointmentDTOs
         public Guid Id { get; set; }
         public decimal Price { get; set; }
         public AppointmentStatus Status { get; set; }
-        public Guid PetId { get; set; }
-        public Guid TimeSlotId { get; set; }
-
-        public Guid UserId { get; set; }
+        public PetDTO? Pet { get; set; }
+        public TimeSlotDTO? TimeSlot { get; set; }
+        public List<NoteDTO>? Notes { get; set; }
+        public List<AppointmentProcedureDTO>? AppointmentProcedures { get; set; }
+        public UserDTO? User { get; set; }
 
         public static AppointmentDTO FromDomain(Appointment appointment)
         {
@@ -19,10 +25,12 @@ namespace HappyPaws.API.Contracts.DTOs.AppointmentDTOs
             {
                 Id = appointment.Id,
                 Status = appointment.Status,
-                PetId = appointment.PetId,
-                TimeSlotId = appointment.TimeSlotId,
+                Pet = PetDTO.FromDomain(appointment.Pet),
+                TimeSlot = TimeSlotDTO.FromDomain(appointment.TimeSlot),
                 Price = appointment.CalculateTotalPrice(),
-                UserId = appointment.UserId
+                User = UserDTO.FromDomain(appointment.User),
+                Notes = appointment.Notes?.Select(NoteDTO.FromDomain).ToList(),
+                AppointmentProcedures = appointment.AppointmentProcedures.Select(AppointmentProcedureDTO.FromDomain).ToList(),
             };
    
             return appointmentDTO;
