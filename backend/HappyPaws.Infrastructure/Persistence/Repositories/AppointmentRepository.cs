@@ -42,6 +42,7 @@ namespace HappyPaws.Infrastructure.Persistence.Repositories
                 .Include(a => a.User)
                 .Include(a => a.Pet)
                 .Where(a => a.PetId == petId)
+                .OrderByDescending(a => a.TimeSlot.Start)
                 .ToListAsync();
         }
 
@@ -54,6 +55,7 @@ namespace HappyPaws.Infrastructure.Persistence.Repositories
                 .Include(a => a.User)
                 .Include(a => a.Pet)
                 .Where(a => a.PetId == petId && a.TimeSlot.UserId == doctorId)
+                .OrderByDescending(a => a.TimeSlot.Start)
                 .ToListAsync();
         }
 

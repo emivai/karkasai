@@ -114,7 +114,7 @@ const Appointments = () => {
               }
               status={getAppointmentStatus(appointment.status)}
               petName={appointment.pet.name}
-              doctorName={appointment.timeSlot.doctor.name}
+              doctorName={`${appointment.timeSlot.doctor.name} ${appointment.timeSlot.doctor.surname}`}
               procedures={appointment.appointmentProcedures
                 .map(procedure => procedure.procedure.name)
                 .join(', ')}
