@@ -21,7 +21,6 @@ const getAppointmentProcedures = createAsyncThunk(
 const createAppointmentProcedure = createAsyncThunk(
   namespace("createAppointmentProcedure"),
   async (payload) => {
-    console.log("second", payload);
     await client.post(
       `appointments/${payload.appointmentId}/appointmentProcedures`,
       { procedureId: payload.procedureId }

@@ -33,7 +33,6 @@ const AppointmentForm = ({ pet, onChange, formValues }) => {
     }
   }, [dispatch, formValues.doctor]);
 
-  console.log(formValues);
   return (
     <form className="my-4">
       <SelectDropdown header={"Pets"} options={[pet?.name]} disabled={true} />

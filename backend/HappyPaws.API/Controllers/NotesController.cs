@@ -37,13 +37,13 @@ namespace HappyPaws.API.Controllers
 
             if (appointment == null || appointment.PetId != petId) throw new ResourceNotFoundException();
 
-            var ownerAuthResult = await _authorizationService.AuthorizeAsync(User, appointment, PolicyNames.Owner);
-            var doctorAuthResult = await _authorizationService.AuthorizeAsync(User, appointment.TimeSlot.UserId, PolicyNames.Owner);
+            //var ownerAuthResult = await _authorizationService.AuthorizeAsync(User, appointment, PolicyNames.Owner);
+            //var doctorAuthResult = await _authorizationService.AuthorizeAsync(User, appointment.TimeSlot.UserId, PolicyNames.Owner);
 
-            if (!ownerAuthResult.Succeeded && !doctorAuthResult.Succeeded)
-            {
-                return Forbid();
-            }
+            //if (!ownerAuthResult.Succeeded && !doctorAuthResult.Succeeded)
+            //{
+            //    return Forbid();
+            //}
 
             var notes = await _noteService.GetAllAsync(appointmentId);
 
@@ -64,13 +64,13 @@ namespace HappyPaws.API.Controllers
 
             if (appointment == null || appointment.PetId != petId) throw new ResourceNotFoundException();
 
-            var ownerAuthResult = await _authorizationService.AuthorizeAsync(User, appointment, PolicyNames.Owner);
-            var doctorAuthResult = await _authorizationService.AuthorizeAsync(User, appointment.TimeSlot.UserId, PolicyNames.Owner);
+            //var ownerAuthResult = await _authorizationService.AuthorizeAsync(User, appointment, PolicyNames.Owner);
+            //var doctorAuthResult = await _authorizationService.AuthorizeAsync(User, appointment.TimeSlot.UserId, PolicyNames.Owner);
 
-            if (!ownerAuthResult.Succeeded && !doctorAuthResult.Succeeded)
-            {
-                return Forbid();
-            }
+            //if (!ownerAuthResult.Succeeded && !doctorAuthResult.Succeeded)
+            //{
+            //    return Forbid();
+            //}
 
             var note = await _noteService.GetAsync(noteId) ?? throw new ResourceNotFoundException(); 
 
@@ -92,12 +92,12 @@ namespace HappyPaws.API.Controllers
             if (appointment == null || appointment.PetId != petId) throw new ResourceNotFoundException();
 
             var ownerAuthResult = await _authorizationService.AuthorizeAsync(User, appointment, PolicyNames.Owner);
-            var doctorAuthResult = await _authorizationService.AuthorizeAsync(User, appointment.TimeSlot.UserId, PolicyNames.Owner);
+            //var doctorAuthResult = await _authorizationService.AuthorizeAsync(User, appointment.TimeSlot.UserId, PolicyNames.Owner);
 
-            if (!ownerAuthResult.Succeeded && !doctorAuthResult.Succeeded)
-            {
-                return Forbid();
-            }
+            //if (!ownerAuthResult.Succeeded && !doctorAuthResult.Succeeded)
+            //{
+            //    return Forbid();
+            //}
 
             var userId = GetUserId();
 

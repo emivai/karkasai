@@ -26,11 +26,8 @@ const createAppointment = createAsyncThunk(
       timeSlotId: payload.timeSlotId,
     });
 
-    console.log("test", id, payload);
-
     await Promise.all(
       payload.procedureIds.map(async (procedureId) => {
-        console.log("fist", procedureId);
         await dispatch(
           createAppointmentProcedure({
             appointmentId: id,
