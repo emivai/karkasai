@@ -7,6 +7,7 @@ namespace HappyPaws.API.Contracts.DTOs.NoteDTOs
         public Guid Id { get; set; }
         public string Value { get; set; }
         public Guid AppointmentId { get; set; }
+        public Guid UserId { get; set; }
 
         public static NoteDTO FromDomain(Note note)
         {
@@ -15,6 +16,7 @@ namespace HappyPaws.API.Contracts.DTOs.NoteDTOs
                 Id = note.Id,
                 Value = note.Value,
                 AppointmentId = note.AppointmentId,
+                UserId = note.UserId
             };
         }
     }
