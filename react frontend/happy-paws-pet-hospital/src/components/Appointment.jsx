@@ -3,7 +3,11 @@ import { useDispatch, useSelector } from "react-redux";
 import Accordion from "react-bootstrap/Accordion";
 import { Modal } from "react-bootstrap";
 import { createNote, deleteNote, editNote, getNotes } from "../reducers/note";
-import { deleteAppointment, getAppointments } from "../reducers/appointment";
+import {
+  deleteAppointment,
+  editAppointment,
+  getAppointments,
+} from "../reducers/appointment";
 import NotesForm from "./NotesForm";
 
 const Appointment = ({
@@ -86,6 +90,11 @@ const Appointment = ({
     dispatch(getAppointments({ id: petId }));
   };
 
+  const handleCancelAppointmentClick = async () => {
+    await dispatch(editAppointment({ petId, id: appointmentId }));
+    dispatch(getAppointments({ id: petId }));
+  };
+
   return (
     <>
       <Modal show={addModalIsOpen} onHide={handleCloseAddModal}>
@@ -146,8 +155,12 @@ const Appointment = ({
             <p className="card-text">Procedures: {procedures}</p>
             <div className="btn-toolbar d-flex gap-1" role="toolbar">
               {status === "Scheduled" && (
-                <button type="button" className="btn btn-secondary me-1">
-                  Edit
+                <button
+                  type="button"
+                  className="btn btn-danger me-1"
+                  onClick={handleCancelAppointmentClick}
+                >
+                  Cancel
                 </button>
               )}
               {(role === 0 || role === 1) && (

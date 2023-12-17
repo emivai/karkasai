@@ -115,11 +115,11 @@ namespace HappyPaws.API.Controllers
                 return Forbid();
             }
 
-            var timeSlot = await _timeSlotService.GetAsync(appointmentDTO.TimeSlotId);
+            //var timeSlot = await _timeSlotService.GetAsync(appointmentDTO.TimeSlotId);
 
-            if (timeSlot == null || (appointment.TimeSlotId != timeSlot.Id && !timeSlot.Available)) throw new BadRequestException("Time slot invalid or unavailable.");
+            //if (timeSlot == null || (appointment.TimeSlotId != timeSlot.Id && !timeSlot.Available)) throw new BadRequestException("Time slot invalid or unavailable.");
 
-            if (timeSlot.Start < DateTime.UtcNow) throw new BadRequestException("Cannot use timeslot from the past.");
+            //if (timeSlot.Start < DateTime.UtcNow) throw new BadRequestException("Cannot use timeslot from the past.");
 
             var userId = GetUserId();
 

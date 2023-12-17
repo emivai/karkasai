@@ -82,9 +82,9 @@ namespace HappyPaws.Infrastructure.Persistence.Repositories
             if (fromDb != null)
             {
                 fromDb.Status = appointment.Status;
-                fromDb.PetId = appointment.PetId;
-                fromDb.TimeSlotId = appointment.TimeSlotId;
-                fromDb.UserId = appointment.UserId;
+                //fromDb.PetId = appointment.PetId;
+                //fromDb.TimeSlotId = appointment.TimeSlotId;
+                //fromDb.UserId = appointment.UserId;
             }
 
             await _context.SaveChangesAsync();

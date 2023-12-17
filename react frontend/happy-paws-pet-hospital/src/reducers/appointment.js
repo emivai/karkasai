@@ -42,7 +42,9 @@ const createAppointment = createAsyncThunk(
 const editAppointment = createAsyncThunk(
   namespace("editAppointment"),
   async (payload) => {
-    await client.put(`appointments/${payload.id}`, payload.value);
+    await client.put(`pets/${payload.petId}/appointments/${payload.id}`, {
+      status: 1,
+    });
   }
 );
 
