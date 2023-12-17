@@ -59,6 +59,15 @@ namespace HappyPaws.Application.Services
 
         public async Task<Appointment> UpdateAsync(Guid id, Appointment appointment)
         {
+            var currAppointmet = await _appointmentRepository.GetAsync(id);
+            var newTimeSlot = await _timeSlotRepository.GetAsync(appointment.TimeSlotId);
+
+            if(currAppointmet.TimeSlotId != newTimeSlot.Id)
+            {
+                VaccateTimeSlot(currAppointmet);
+                ClaimTimeSlot(appointment);
+            }
+
             return await _appointmentRepository.UpdateAsync(id, appointment);
         }
 
