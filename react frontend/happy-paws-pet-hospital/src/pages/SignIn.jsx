@@ -8,7 +8,7 @@ const SignIn = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
-  const {isLoggedIn} = useSelector(state => state.auth)
+  const { isLoggedIn } = useSelector(state => state.auth)
 
   const [loginValue, setLoginValue] = useState({
     email: '',
@@ -27,15 +27,16 @@ const SignIn = () => {
   }
 
   useEffect(() => {
-    if(isLoggedIn)
-    {
+    if (isLoggedIn) {
       navigate('/')
     }
   }, [isLoggedIn])
-  
 
   return (
-    <div className='container d-flex align-items-center justify-content-center'>
+    <div
+      className='container d-flex align-items-center justify-content-center'
+      style={{ marginBottom: '50px' }}
+    >
       <div className='form'>
         <img className='mb-4' src={Logo} alt='' width='150' height='150' />
         <h1 className='h3 mb-3 font-weight-normal'>Please sign in</h1>

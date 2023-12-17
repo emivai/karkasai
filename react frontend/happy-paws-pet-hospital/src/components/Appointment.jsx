@@ -189,11 +189,14 @@ const Appointment = ({
                     <Accordion.Header>Notes</Accordion.Header>
                     <Accordion.Body>
                       {notes.map(note => (
-                        <div key={note.id}>
-                          <div>{note.value}</div>
+                        <div
+                          className='d-flex align-items-center'
+                          key={note.id}
+                        >
+                          <div className='flex-grow-1'>{note.value}</div>
                           <button
                             type='button'
-                            className='btn btn-secondary me-2'
+                            className='btn btn-secondary me-2 mb-2'
                             onClick={() => handleOpenEditModal(note)}
                           >
                             Edit
@@ -201,7 +204,7 @@ const Appointment = ({
                           {(role === 0 || role === 2) && (
                             <button
                               type='button'
-                              className='btn btn-danger'
+                              className='btn btn-danger mb-2'
                               onClick={() => handleDeleteClick(note.id)}
                             >
                               Delete

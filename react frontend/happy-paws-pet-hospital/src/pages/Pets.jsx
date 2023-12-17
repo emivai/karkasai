@@ -41,15 +41,17 @@ const Pets = () => {
   }, [dispatch])
 
   return (
-    <div className='container marketing pt-5 d-flex flex-column'>
-      {role === 0 ||
-        (role === 1 && (
-          <div className='mb-2 align-self-start'>
-            <button className='btn btn-info btn-lg' onClick={handleOpenModal}>
-              Add pet
-            </button>
-          </div>
-        ))}
+    <div
+      className='container marketing pt-5 d-flex flex-column'
+      style={{ marginBottom: '50px' }}
+    >
+      {(role === 0 || role === 1) && (
+        <div className='mb-2 align-self-start'>
+          <button className='btn btn-info btn-lg' onClick={handleOpenModal}>
+            Add pet
+          </button>
+        </div>
+      )}
 
       <Modal show={modalIsOpen} onHide={handleCloseModal}>
         <Modal.Header closeButton>
