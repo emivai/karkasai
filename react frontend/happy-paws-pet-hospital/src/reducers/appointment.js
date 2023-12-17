@@ -49,7 +49,7 @@ const editAppointment = createAsyncThunk(
 const deleteAppointment = createAsyncThunk(
   namespace("deleteAppointment"),
   async (payload) => {
-    await client.delete(`appointments/${payload}`);
+    await client.delete(`pets/${payload.petId}/appointments/${payload.id}`);
   }
 );
 

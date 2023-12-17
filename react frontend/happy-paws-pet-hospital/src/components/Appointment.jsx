@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Accordion from "react-bootstrap/Accordion";
 import { Modal } from "react-bootstrap";
 import { createNote, deleteNote, editNote, getNotes } from "../reducers/note";
-import { getAppointments } from "../reducers/appointment";
+import { deleteAppointment, getAppointments } from "../reducers/appointment";
 import NotesForm from "./NotesForm";
 
 const Appointment = ({
@@ -81,6 +81,11 @@ const Appointment = ({
     dispatch(getAppointments({ id: petId }));
   };
 
+  const handleDeleteAppointmentClick = async () => {
+    await dispatch(deleteAppointment({ petId, id: appointmentId }));
+    dispatch(getAppointments({ id: petId }));
+  };
+
   return (
     <>
       <Modal show={addModalIsOpen} onHide={handleCloseAddModal}>
@@ -149,7 +154,7 @@ const Appointment = ({
                 <button
                   type="button"
                   className="btn btn-danger me-1"
-                  onClick={handleOpenAddModal}
+                  onClick={handleDeleteAppointmentClick}
                 >
                   Delete
                 </button>
